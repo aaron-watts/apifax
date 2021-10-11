@@ -1,0 +1,23 @@
+@import 'config';
+@import '100';
+
+header {
+    & .clock {
+        color: $yellow;
+        & > * {
+            color: $yellow;
+        }
+    }
+
+    .scans > * {
+        color: inherit;
+    }
+}
+
+body {    
+    padding: 2px;
+    display: grid;
+    grid-template-rows: 1rem auto;
+    grid-template-columns: 1fr;
+    height: 100vh;
+}

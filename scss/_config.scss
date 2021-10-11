@@ -1,0 +1,36 @@
+$cell-width: 2.48vw;
+
+$black: #000;
+$white: #fff;
+$red: #f00;
+$green: #0f0;
+$blue: #00f;
+$yellow: #ff0;
+$cyan: #0ff;
+$magenta: #f0f;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: 'Press Start 2P', monospace;
+    color: #fff;
+    font-size: 2.48vw;
+}
+
+html {
+    background: #000;
+    cursor: default;
+    user-select: none;
+}
+
+.green {
+    color: $green !important;
+}
+
+@mixin media-md {
+    @media screen and (min-width:580px) {
+        @content;
+    }
+}

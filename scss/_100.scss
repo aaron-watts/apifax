@@ -1,0 +1,110 @@
+.p100 {
+    // background: $green;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem 4rem auto 1rem;
+
+    #{&}__brand {
+        background: $blue;
+        display: flex;
+        justify-content: center;
+
+        & span {
+            margin: .2rem 1.5rem;
+            text-transform: uppercase;
+            color: $yellow;
+            transform-origin: top left;
+
+            &:nth-of-type(1n) {
+                transform: scale(3);
+                text-shadow: $black 0 .1rem;
+            }
+
+            &:nth-of-type(2n) {
+                transform: scale(3) translateY(.2rem);
+                text-shadow: $black 0 -.1rem;
+            }
+        }
+    }
+
+    #{&}__updates {
+        border-bottom: 1px solid $cyan;
+
+        & h2 {
+            color: $yellow;
+        }
+
+        &--reel {
+            color: $red;
+            text-transform: uppercase;
+            transform: scaleY(2);
+            transform-origin: top;
+            text-align: right;
+        }
+    }
+
+    #{&}__contents {
+        display: grid;
+        grid-auto-rows: 25%;
+        // grid-auto-columns: 80%;
+        justify-items: center;
+        // align-items: center;
+        text-transform: uppercase;
+        // background: $green;
+
+
+        & ul {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            justify-content: center;
+            align-items: center;
+
+            & li {
+                display: flex;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+
+                & span {
+                    display: block;
+
+                    &:nth-of-type(1) {
+                        color: $yellow;
+                    }
+
+                    &:nth-of-type(2) {
+                        color: $cyan;
+                    }
+                }  
+            }
+        }
+    }
+
+    footer {
+        background: $blue;
+        color: $yellow;
+        text-align: center;
+    }
+}
+
+@include media-md {
+    .p100 {
+        #{&}__contents {
+            margin-top: 2rem;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+    
+            & ul {
+                width: 18rem;
+                height: minmax(12rem, 24rem);
+                justify-content: flex-start;
+
+                &:nth-of-type(2) {
+                    grid-column: 1 / 2;
+                    grid-row: 2 / 3;
+                }
+            }
+        }
+    }
+}
