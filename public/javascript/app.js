@@ -28,24 +28,38 @@ const clock = {
 
 setInterval(clock.tick, 1000);
 
-// object to hold all api fetch data, one fetch ONLY per API to prevent
-// quotas being rinsed
-const fetchData = {};
-
 const programme = {
     currentPage: '100',
     display: {
         clearScreen: () => {
+            for (let listener in pageListeners[programme.currentPage]) {
+                window.removeEventListener(
+                    pageListeners[programme.currentPage][listener][0],
+                    pageListeners[programme.currentPage][listener][1]
+                )
+            }
             document.querySelectorAll('main, footer').forEach(i => { i.remove() });
         },
-        loadScreen: (pageNumber, html) => {
+        loadScreen: (pageNumber) => {
             const body = document.querySelector('body');
             const main = document.createElement('main');
-            main.innerHTML = html;
+            main.innerHTML = pageTemplates[pageNumber];
             main.classList.add(`p${pageNumber}`);
             body.appendChild(main);
 
-            // if (pageNumber in pageFunctions)
+            // cache dom for function reference
+            cacheDOM[pageNumber]();
+            // execute functions and define for event listeners
+            for (let fn in pageFunctions[pageNumber]) {
+                pageFunctions[pageNumber][fn]();
+            }
+            // add eventlisteners
+            for (let listener in pageListeners[pageNumber]) {
+                window.addEventListener(
+                    pageListeners[pageNumber][listener][0],
+                    pageListeners[pageNumber][listener][1]
+                )
+            }
         }
     },
     scanner: {
@@ -63,12 +77,13 @@ const programme = {
             } else {
                 scans.classList.remove('green');
 
+                console.log('SCAN FINISHED!');
                 // loadPage(pageNumber);
-                if (pageN in pages) {
-                    console.log(`${typeof pageN} ${pageN}`);
+                if (pageN in pageTemplates) {
+                    console.log('PAGEN IN PAGES');
                     programme.currentPage = pageN;
-                    // load page
-                    programme.display.loadScreen(pageN,)
+                    programme.display.clearScreen();
+                    programme.display.loadScreen(pageN);
                 } else {
                     scannerInterface.innerText = programme.currentPage;
                     channel.innerText = programme.currentPage;
@@ -101,8 +116,6 @@ const programme = {
     }
 };
 
-// window.addEventListener('resize', pages['100'].contentTrails);
-
 window.addEventListener('keypress', (evt) => {
     if (!isNaN(evt.key)) {
         programme.channelInput(evt.key);
@@ -110,20 +123,16 @@ window.addEventListener('keypress', (evt) => {
 });
 
 let apidata;
-
-
 let pageTemplates;
 fetch('/pages')
     .then(res => res.json())
     .then(data => {
         pageTemplates = data;
-        programme.display.loadScreen('100', pageTemplates['100']);
+        // programme.display.loadScreen('100');
         fetch('/data')
             .then(res => res.json())
             .then(data => {
                 apidata = data;
-                for (let fn in pageFunctions['100']) {
-                    pageFunctions['100'][fn]();
-                }
+                programme.display.loadScreen('101');
             })
     })

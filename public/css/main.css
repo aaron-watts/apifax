@@ -161,6 +161,60 @@ html {
   }
 }
 
+.p101 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 4rem auto;
+      grid-template-rows: 4rem auto;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.p101 .p101__header {
+  background: #0ff;
+  color: #00f;
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  text-align: center;
+  border-bottom: 0.2rem solid #00f;
+}
+
+.p101 .p101__header--text {
+  color: #00f;
+  text-transform: uppercase;
+  font-size: 3rem;
+  display: block;
+  -webkit-transform: translateY(0.3rem);
+          transform: translateY(0.3rem);
+  text-shadow: #f0f 0.3rem 0.3rem;
+}
+
+.p101 .p101__headlines {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[10];
+      grid-template-rows: repeat(10, 1fr);
+}
+
+.p101 .p101__headlines li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 38rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.p101 .p101__headlines li span:nth-of-type(1) {
+  width: 32rem;
+}
+
+.p101 .p101__headlines li:nth-of-type(odd) span:nth-of-type(1) {
+  color: #0ff;
+}
+
 header .clock {
   color: #ff0;
 }

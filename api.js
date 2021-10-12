@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== "production") {
-    require('dotenv').config();
-}
-
 const axios = require("axios");
 
 module.exports.getNews = async () => {
@@ -10,7 +6,7 @@ module.exports.getNews = async () => {
     
     let result = await axios.get(newsURL);
     return result.data.articles;
-}
+};
 
 module.exports.getWeather = async (latlon) => {
     const latLon = {
@@ -31,10 +27,4 @@ module.exports.getWeather = async (latlon) => {
     }
 
     return results;
-}
-
-// const myFunc = () => {
-//     const r = getWeather().then(i=>{console.log(i)})
-// }
-
-// myFunc();
+};
