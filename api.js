@@ -1,10 +1,12 @@
 const axios = require("axios");
 
 module.exports.getNews = async () => {
+    console.log('getting news')
     const today = new Date();
     const newsURL = `https://gnews.io/api/v4/top-headlines?country=gb&from=${today.toISOString()}&token=${process.env.NEWSAPI}`;
     
     let result = await axios.get(newsURL);
+    console.log(result)
     return result.data.articles;
 };
 

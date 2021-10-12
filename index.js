@@ -40,20 +40,6 @@ app.get('/data', async (req, res) => {
         weather: ['none found']
       })
     });
-
-  // apiData.weather = await getWeather();
-  // apiData.news = await getNews();
-
-  // res.send(apiData);
-
-  // axios.get(newsURL)
-  //     .then(response => {
-  //         apiData.news = response.data.articles;
-  //         res.send(apiData);
-  //     })
-  //     .catch(err => res.send({ done: 'ERROR' }));
-
-
 })
 
 app.listen(PORT, () => {
