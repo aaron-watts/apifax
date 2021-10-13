@@ -6,7 +6,7 @@ module.exports.getNews = async () => {
     const newsURL = `https://gnews.io/api/v4/top-headlines?country=gb&from=${today.toISOString()}&token=${process.env.NEWSAPI}`;
     
     let result = await axios.get(newsURL);
-    console.log(result)
+
     return result.data.articles;
 };
 
@@ -20,12 +20,17 @@ module.exports.getWeather = async (latlon) => {
         dumfries: ['-3.606790', '55.072350'],
         inverness: ['57.47908', '-4.22398']
     };
-    const results = {};
+    const results = [];
 
     for (let location in latLon) {
         const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latLon[location][0]}&lon=${latLon[location][1]}&exclude=minutely,hourly,daily&appid=${process.env.WEATHERAPI}`;
         let result = await axios.get(weatherURL);
-        results[location] = result.data;
+        // results[location] = result.data;
+        results.push({
+                location,
+                temp: result.data.current.temp,
+                description: result.data.current.weather[0].description
+            });
     }
 
     return results;

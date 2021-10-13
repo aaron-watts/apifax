@@ -14,21 +14,66 @@ const { getWeather, getNews } = require('./api');
 const pageTemplates = require('./pages');
 
 const PORT = 3000;
+const dbFile = './apidata.db';
 
 const dbPromise = open({
-  filename: './database/apidata.db',
+  filename: dbFile,
   driver: sqlite3.Database
 });
-
 const setupDatabase = async () => {
   const db = await dbPromise;
   await db.migrate();
-}
 
+  const log = await db.all('SELECT * FROM log;');
+  console.log(log);
+  if (!log.length) {
+    console.log("No previous log found..Writing base value of 0 to TABLE:'log'");
+    await db.run('INSERT INTO log (lastCall) VALUES (?);', 0);
+  }
+}
 setupDatabase();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+
+// a middleware to check if api requests need to be made
+const checkLog = async (req, res, next) => {
+  const db = await dbPromise;
+  const log = await db.all('SELECT * FROM log;');
+  const now = new Date().getTime();
+
+  // if last data collection was over an hour ago, then do a new one
+  // if (now - log[0].lastCall * 1000 > 1000 * 60 * 60) {
+  if (now - log[0].lastCall * 1000 > 1000) { // one second (debug)
+    // make the api requests
+    Promise.all([getNews(), getWeather()])
+      .then(async function (results) {
+        // const newsValues = [];
+        // results[0].forEach(i => {
+        //   newsValues.push(i.title);
+        //   newsValues.push(i.description);
+        // });
+        // const placholders = results[0].map(i => '(?, ?)').join(',');
+
+        // await db.run(`INSERT INTO news (title, description) VALUES ${placholders};`, newsValues);
+
+        console.log(results[1][0].location);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    // update log
+    const sql = `UPDATE log
+                SET lastCall = ?
+                WHERE id = ? ;`;
+    const see = await db.run(sql, [now / 1000, 1], () => {
+      console.log(this.changes);
+    });
+  }
+
+  return next();
+}
 
 app.get('/', (req, res) => {
   res.redirect('/index.html');
@@ -38,23 +83,26 @@ app.get('/pages', (req, res) => {
   res.send(pageTemplates);
 });
 
-app.get('/data', async (req, res) => {
-  // create an api object
-  const apiData = {};
+// We now need to include a data in here if it hasn't been done yet
+app.get('/data', checkLog, async (req, res) => {
+  res.send('DENIED!');
 
-  Promise.all([getNews(), getWeather()])
-    .then(function (results) {
-      apiData.news = results[0];
-      apiData.weather = results[1];
+  // // create an api object
+  // const apiData = {};
 
-      res.send(apiData);
-    })
-    .catch(() => {
-      res.send({
-        news: ['none found'],
-        weather: ['none found']
-      })
-    });
+  // Promise.all([getNews(), getWeather()])
+  //   .then(function (results) {
+  //     apiData.news = results[0];
+  //     apiData.weather = results[1];
+
+  //     res.send(apiData);
+  //   })
+  //   .catch(() => {
+  //     res.send({
+  //       news: ['none found'],
+  //       weather: ['none found']
+  //     })
+  //   });
 })
 
 app.listen(PORT, () => {
