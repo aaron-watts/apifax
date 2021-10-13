@@ -6,11 +6,26 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
+
 const axios = require('axios');
 const { getWeather, getNews } = require('./api');
 const pageTemplates = require('./pages');
 
 const PORT = 3000;
+
+const dbPromise = open({
+  filename: './database/apidata.db',
+  driver: sqlite3.Database
+});
+
+const setupDatabase = async () => {
+  const db = await dbPromise;
+  await db.migrate();
+}
+
+setupDatabase();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
