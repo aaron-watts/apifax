@@ -24,8 +24,10 @@ const setupDatabase = async () => {
   const db = await dbPromise;
   await db.migrate();
 
+  // Check for an existing log, add a base value of ZERO if none found
+  // ZERO allows first api data collection to execute, log is then updated
+  // to current time
   const log = await db.all('SELECT * FROM log;');
-  console.log(log);
   if (!log.length) {
     console.log("No previous log found..Writing base value of 0 to TABLE:'log'");
     await db.run('INSERT INTO log (lastCall) VALUES (?);', 0);
@@ -41,15 +43,15 @@ const formatInsertMany = (arr, table) => {
   const tables = ['news', 'weather'];
   const keys = Object.keys(arr[0])
   const values = [];
-        arr.forEach(i => {
-          for (let key of keys) {
-            values.push(i[key]);
-          }
-        })
-        const placeholders = arr.map(i => `(${keys.map(key => '?').join(' , ')})`).join(',');
+  arr.forEach(i => {
+    for (let key of keys) {
+      values.push(i[key]);
+    }
+  })
+  const placeholders = arr.map(i => `(${keys.map(key => '?').join(' , ')})`).join(',');
 
-        return [`INSERT INTO ${tables[table]} (${keys.map(key => key).join(' ,')}) VALUES ${placeholders};`, values];
-        // await db.run(`INSERT INTO weather (city, temp, description) VALUES ${placeholders};`, values);
+  return [`INSERT INTO ${tables[table]} (${keys.map(key => key).join(' ,')}) VALUES ${placeholders};`, values];
+  // await db.run(`INSERT INTO weather (city, temp, description) VALUES ${placeholders};`, values);
 };
 
 const getAll = async (table) => {
@@ -57,15 +59,24 @@ const getAll = async (table) => {
   return await db.all(`SELECT * FROM ${table};`)
 };
 
+/////////////////////////
+// REFACTOR THIS MIDDLEWARE - IT WORKS BUT IT SUCKS !!!
+/////////////////////////
 // a middleware to check if api requests need to be made
 const checkLog = async (req, res, next) => {
-  const db = await dbPromise;
-  const log = await db.all('SELECT * FROM log;');
+  const tables = [
+    'news',
+    'weather'
+  ];
   const now = new Date().getTime();
+
+  const db = await dbPromise;
+  const log = await db.all('SELECT * FROM log;');  
 
   // if last data collection was over an hour ago, then do a new one
   if (now - log[0].lastCall * 1000 > 1000 * 60 * 60) {
-  // if (now - log[0].lastCall * 1000 > 1000) { // one second (debug)
+    // if (now - log[0].lastCall * 1000 > 1000) { // one second (debug)
+
     // Check if tables in database are populated
     Promise.all([getAll('news'), getAll('weather')])
       .then((results) => {
@@ -73,7 +84,7 @@ const checkLog = async (req, res, next) => {
           Promise.all([api.getNews(), api.getWeather()])
             .then(async function (results) {
               // this should only be used in event of empty tables!
-              results.forEach(async(i, index) => {
+              results.forEach(async (i, index) => {
                 const query = formatInsertMany(i, index);
                 await db.run(query[0], query[1]);
               })
@@ -82,29 +93,15 @@ const checkLog = async (req, res, next) => {
               console.log(err.message);
             });
         } else {
-          // update tables
+          req.apiData = {
+            news: results[0],
+            weather: results[1]
+          };
         }
       })
       .catch(err => {
         console.log(err.message);
       })
-
-    // make the api requests
-    // Promise.all([getNews(), getWeather()])
-    //   .then(async function (results) {
-
-
-
-    //     // this should only be used in event of empty tables!
-    //     // results.forEach(async(i, index) => {
-    //     //   const query = formatInsertMany(i, index);
-    //     //   await db.run(query[0], query[1]);
-    //     // })
-
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
 
     // update log
     const sql = `UPDATE log
@@ -113,6 +110,14 @@ const checkLog = async (req, res, next) => {
     const see = await db.run(sql, [now / 1000, 1], () => {
       console.log(this.changes);
     });
+  } else {
+    await Promise.all(tables.map(i => getAll(i)))
+      .then(results => {
+        req.apiData = {
+          news: results[0],
+          weather: results[1]
+        }
+      })
   }
 
   return next();
@@ -128,24 +133,7 @@ app.get('/pages', (req, res) => {
 
 // We now need to include a data in here if it hasn't been done yet
 app.get('/data', checkLog, async (req, res) => {
-  // res.send('DENIED!');
-
-  // // create an api object
-  // const apiData = {};
-
-  Promise.all([getAll('news'), getAll('weather')])
-    .then(function (results) {
-      apiData.news = results[0];
-      apiData.weather = results[1];
-
-      res.send(apiData);
-    })
-    .catch(() => {
-      res.send({
-        news: ['none found'],
-        weather: ['none found']
-      })
-    });
+  res.send(req.apiData);
 })
 
 app.listen(PORT, () => {
