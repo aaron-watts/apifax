@@ -1,10 +1,21 @@
+/*
+API UTILITIES
+
+Module Exports:
+    getNews/fn              Gets weather from openweathermap API
+    getWeather/fn           Gets news from GNews api
+*/
+
 const axios = require("axios");
 
 module.exports.getNews = async () => {
     const today = new Date();
     const results = [];
-    const newsURL = `https://gnews.io/api/v4/top-headlines?country=gb&from=${today.toISOString()}&token=${process.env.NEWSAPI}`;
-    
+    const newsURL = `https://gnews.io/api/v4/top-headlines?` +
+        `country=gb&` +
+        `from=${today.toISOString()}&` +
+        `token=${process.env.NEWSAPI}`;
+
     let result = await axios.get(newsURL);
 
     for (let article of result.data.articles) {
@@ -31,14 +42,18 @@ module.exports.getWeather = async () => {
     const results = [];
 
     for (let location in latLon) {
-        const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latLon[location][0]}&lon=${latLon[location][1]}&units=metric&exclude=minutely,hourly,daily&appid=${process.env.WEATHERAPI}`;
+        const weatherURL = `https://api.openweathermap.org/data/2.5/onecall?` +
+            `lat=${latLon[location][0]}&lon=${latLon[location][1]}&` +
+            `units=metric&exclude=minutely,hourly,daily` +
+            `&appid=${process.env.WEATHERAPI}`;
+
         let result = await axios.get(weatherURL);
 
         results.push({
-                city: location,
-                temp: Math.round(result.data.current.temp),
-                description: result.data.current.weather[0].description
-            });
+            city: location,
+            temp: Math.round(result.data.current.temp),
+            description: result.data.current.weather[0].description
+        });
     }
 
     return results;
