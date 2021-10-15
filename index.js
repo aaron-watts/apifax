@@ -7,7 +7,6 @@ const app = express();
 const path = require('path');
 
 const axios = require('axios');
-const api = require('./utils/api_utils');
 const db = require('./utils/db_utils');
 const pageTemplates = require('./pages');
 

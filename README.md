@@ -25,7 +25,8 @@ The BBC ceefax pages were inidividually edited by hand *(and a computer)*, every
 
 #### CSS Grid
 <img src="./grid.png">
-<p>The original grid layout, quickly abandoned in favour of efficiency!</p>
+
+*The original grid layout, quickly abandoned in favour of efficiency!*
 
 Originally, I had planned on following the original BBC CeeFax standard of a gridded display, consisting of 40 columns and 22 rows, with each cell consisting of 2 by 3 'pixels', and capable of a fill and/or border using an "on or off" rgb pallette. These standards can be observed at [edit.tf](https://edit.tf), where TeeFax users can design their own page art.
 
@@ -52,4 +53,4 @@ Without a rendering engine, I was unable to pipe data such as the API resonses a
 #### SQLite
 Despite desiging the site in a way that minimised API calls by calling once on page load, whilst testing I quickly found myself consuming my API quota's. I decided I could control this this by making requests once, and storing the data. I didn't feel that an entire database on another server was justified for such small amounts of data, so SQLite seemed the obvious choice.
 
-I would have one table primarily to record the datetime of the most recent axios call, if it made longer than *X* hours ago, a new call would be made, and the responses would be logged in their own respective tables, ready to be fetched by the app. This would keep me well inside of my quotas... *hopefully.*
+I would have one table primarily to record the datetime of the most recent axios call, if it had been made longer than *X* hours ago, a new call would be made, and the responses would be logged in their own respective tables, ready to be fetched by the app. This would keep me well inside of my quotas... *hopefully.*
