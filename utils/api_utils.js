@@ -25,11 +25,9 @@ module.exports.getNews = async () => {
         });
     }
 
-    // console.log(results[0]);
     return results;
 };
 
-// FYI param included latlon, looked defunct but might cause issue ???
 module.exports.getWeather = async () => {
     const latLon = {
         london: ['51.50853', '-0.12574'],
@@ -57,6 +55,5 @@ module.exports.getWeather = async () => {
         });
     }
 
-    // console.log(results[0]);
     return results;
 };

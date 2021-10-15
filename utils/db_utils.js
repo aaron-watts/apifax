@@ -4,6 +4,7 @@ DATABASE UTILITIES
 Module Exports:
     setupDatabase/fn            Handles sql migration and sets a base 
                                 value of zero in log table
+    collectData/fn (middleware) Collects all data from database
     checkLog/fn (middleware)    Checks log timestamp and calls api request
                                 if +1 hour has passed 
 
@@ -68,7 +69,6 @@ const getAll = async (table) => {
 module.exports.collectData = async (req, res, next) => {
     await Promise.all(tables.map(table => getAll(table)))
         .then(results => {
-            // console.log(results);
             req.apiData = {
                 news: results[0],
                 weather: results[1]
@@ -94,6 +94,7 @@ module.exports.checkLog = async (req, res, next) => {
         await Promise.all([api.getNews(), api.getWeather()])
             .then(async (results) => {
                 let apiData = {};
+
                 // save apidata to database
                 results.forEach(async (result, i) => {
                     const query = formatInsertMany(result, i);

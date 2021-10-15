@@ -26,9 +26,7 @@ app.get('/pages', (req, res) => {
   res.send(pageTemplates);
 });
 
-// We now need to include a data in here if it hasn't been done yet
 app.get('/data', db.checkLog, db.collectData, async (req, res) => {
-  console.log(req.apiData);
   res.send(req.apiData);
 })
 
