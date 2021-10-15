@@ -6,8 +6,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-const axios = require('axios');
 const db = require('./utils/db_utils');
+
 const pageTemplates = require('./pages');
 
 const PORT = 3000;
@@ -27,7 +27,8 @@ app.get('/pages', (req, res) => {
 });
 
 // We now need to include a data in here if it hasn't been done yet
-app.get('/data', db.checkLog, async (req, res) => {
+app.get('/data', db.checkLog, db.collectData, async (req, res) => {
+  console.log(req.apiData);
   res.send(req.apiData);
 })
 

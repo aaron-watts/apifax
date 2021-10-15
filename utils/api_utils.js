@@ -25,6 +25,7 @@ module.exports.getNews = async () => {
         });
     }
 
+    // console.log(results[0]);
     return results;
 };
 
@@ -56,5 +57,6 @@ module.exports.getWeather = async () => {
         });
     }
 
+    // console.log(results[0]);
     return results;
 };

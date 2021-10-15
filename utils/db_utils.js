@@ -65,6 +65,22 @@ const getAll = async (table) => {
     return await db.all(`SELECT * FROM ${table};`)
 };
 
+module.exports.collectData = async (req, res, next) => {
+    await Promise.all(tables.map(table => getAll(table)))
+        .then(results => {
+            // console.log(results);
+            req.apiData = {
+                news: results[0],
+                weather: results[1]
+            };
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
+
+    return next();
+}
+
 module.exports.checkLog = async (req, res, next) => {
     const now = new Date().getTime();
 
@@ -72,42 +88,25 @@ module.exports.checkLog = async (req, res, next) => {
     const log = await db.all('SELECT * FROM log;');
 
     // if last data collection was over an hour ago, then do a new one
-    if (now - (log[0].lastCall * 1000) > (1000)) {
+    if (now - (log[0].lastCall * 1000) > (1000 * 60 * 60)) {
 
         // contact api's for data
-        Promise.all([api.getNews(), api.getWeather()])
+        await Promise.all([api.getNews(), api.getWeather()])
             .then(async (results) => {
+                let apiData = {};
                 // save apidata to database
                 results.forEach(async (result, i) => {
                     const query = formatInsertMany(result, i);
                     await db.run(query[0], query[1]);
                 });
 
-                // add adata to request
-                req.apiData = {
-                    news: results[0],
-                    weather: results[1]
-                };
-                console.log('Collect New Data...');
-                console.log(req.apiData);
-
                 // update log
                 const sql = `UPDATE log SET lastCall = ? WHERE id = ? ;`;
                 await db.run(sql, [now / 1000, 1]);
-            }).catch(() => {
+            }).catch(err => {
                 // send service down message in place of data
                 // if service down dislay test screen => funny!! :D:D:D
-            });
-
-    } else {
-        await Promise.all(tables.map(table => getAll(table)))
-            .then(results => {
-                req.apiData = {
-                    news: results[0],
-                    weather: results[1]
-                };
-                console.log('Get existing data...');
-                console.log(req.apiData);
+                console.log(err.message);
             });
     }
 

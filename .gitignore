@@ -1,2 +1,4 @@
 apidata.db
 notes.txt
+.env
+node_modules/*
