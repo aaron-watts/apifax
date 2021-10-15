@@ -12,6 +12,8 @@ Helpers:
     dbPromise/Promise           Returns connection to SQLite database
     formatInsertMany/fn         Takes apiData and table name as parameters
                                 and returns SQL syntax for insertmany query
+    formatUpdate/fn             Takes apidata, table name and index/id as params
+                                Returns an update query per row
     getAll/fn                   Takes table name as param and returns select
                                 all query result
 */
@@ -48,18 +50,36 @@ module.exports.setupDatabase = async () => {
 
 // helper to insert data in to db
 const formatInsertMany = (arr, table) => {
-    const keys = Object.keys(arr[0])
+    const keys = Object.keys(arr[0]);
     const values = [];
+
     arr.forEach(i => {
         for (let key of keys) {
             values.push(i[key]);
         }
     })
+
     const placeholders = arr.map(i => `(${keys.map(key => '?').join(' , ')})`).join(',');
 
     return [`INSERT INTO ${tables[table]} (${keys.map(key => key).join(' ,')}) 
             VALUES ${placeholders};`, values];
 };
+
+const formatUpdate = (data, table, index) => {
+    const keys = Object.keys(data);
+    const values = [];
+
+    let sql = `UPDATE ${tables[table]} SET `;
+    
+    keys.forEach(i => {
+        sql += `${i} = (?),`;
+        values.push(data[i]);
+    });
+
+    sql = `${sql.slice(0, sql.length - 1)} WHERE id = ${index}`;
+
+    return [sql, values];
+}
 
 const getAll = async (table) => {
     const db = await dbPromise;
@@ -90,25 +110,47 @@ module.exports.checkLog = async (req, res, next) => {
     // if last data collection was over an hour ago, then do a new one
     if (now - (log[0].lastCall * 1000) > (1000 * 60 * 60)) {
 
-        // contact api's for data
-        await Promise.all([api.getNews(), api.getWeather()])
-            .then(async (results) => {
-                let apiData = {};
+        const data = await getAll('news');
 
-                // save apidata to database
-                results.forEach(async (result, i) => {
-                    const query = formatInsertMany(result, i);
-                    await db.run(query[0], query[1]);
+        // IF DATA DOES NOT EXISTS
+        if (!data.length) {
+            // contact api's for data
+            await Promise.all([api.getNews(), api.getWeather()])
+                .then(async (results) => {
+                    let apiData = {};
+
+                    // save apidata to database
+                    results.forEach(async (result, i) => {
+                        const query = formatInsertMany(result, i);
+                        await db.run(query[0], query[1]);
+                    });
+
+                    // update log
+                    const sql = `UPDATE log SET lastCall = ? WHERE id = ? ;`;
+                    // await db.run(sql, [now / 1000, 1]);
+                }).catch(err => {
+                    // send service down message in place of data
+                    // if service down dislay test screen => funny!! :D:D:D
+                    console.log(err.message);
                 });
+        } else {
 
-                // update log
-                const sql = `UPDATE log SET lastCall = ? WHERE id = ? ;`;
-                await db.run(sql, [now / 1000, 1]);
-            }).catch(err => {
-                // send service down message in place of data
-                // if service down dislay test screen => funny!! :D:D:D
-                console.log(err.message);
-            });
+            // update data
+            await Promise.all([api.getNews(), api.getWeather()])
+                .then(async results => {
+                    // for each api result
+                    results.forEach((dataset, i) => {
+                        // for each row
+                        dataset.forEach(async (row, j) => {
+
+                            const query = formatUpdate(row, i, j + 1);
+                            await db.run(query[0], query[1]);
+
+                        });
+                    });
+                });
+        }
+
     }
 
     return next();
