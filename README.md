@@ -1,11 +1,3 @@
-<style>
-    .my-img {
-        display: block;
-        margin: 0 auto;
-        width: 50vw;
-    }
-</style>
-
 # A P I F A X 
 ApiFax is a responisive imitation of teletext for modern web browsers.
 
@@ -32,10 +24,8 @@ Whilst researching for this project, I came across a project called <a href="htt
 The BBC ceefax pages were inidividually edited by hand *(and a computer)*, every page was unique and followed it's own layout design. I wanted to replicate this concept, and SCSS's nesting capabilities seemed a logical way to apply unique styling to each page.
 
 #### CSS Grid
-<p class="my-img">
 <img src="./grid.png">
-<em>The original grid layout, quickly abandoned in favour of efficiency!</em>
-</p>
+<p>The original grid layout, quickly abandoned in favour of efficiency!</p>
 
 Originally, I had planned on following the original BBC CeeFax standard of a gridded display, consisting of 40 columns and 22 rows, with each cell consisting of 2 by 3 'pixels', and capable of a fill and/or border using an "on or off" rgb pallette. These standards can be observed at [edit.tf](https://edit.tf), where TeeFax users can design their own page art.
 
