@@ -10,6 +10,8 @@ Module Exports:
 
 Helpers:
     dbPromise/Promise           Returns connection to SQLite database
+    updateLog/fn                Takes unix time as param, updates the log record
+                                in SQL database
     formatInsertMany/fn         Takes apiData and table name as parameters
                                 and returns SQL syntax for insertmany query
     formatUpdate/fn             Takes apidata, table name and index/id as params
@@ -48,6 +50,12 @@ module.exports.setupDatabase = async () => {
     }
 }
 
+const updateLog = async (timestamp) => {
+    const db = await dbPromise;
+    const sql = `UPDATE log SET lastCall = ? WHERE id = ? ;`;
+    await db.run(sql, [timestamp, 1]);
+}
+
 // helper to insert data in to db
 const formatInsertMany = (arr, table) => {
     const keys = Object.keys(arr[0]);
@@ -70,7 +78,7 @@ const formatUpdate = (data, table, index) => {
     const values = [];
 
     let sql = `UPDATE ${tables[table]} SET `;
-    
+
     keys.forEach(i => {
         sql += `${i} = (?),`;
         values.push(data[i]);
@@ -109,11 +117,13 @@ module.exports.checkLog = async (req, res, next) => {
 
     // if last data collection was over an hour ago, then do a new one
     if (now - (log[0].lastCall * 1000) > (1000 * 60 * 60)) {
+        //1634302448.529
 
         const data = await getAll('news');
 
         // IF DATA DOES NOT EXISTS
         if (!data.length) {
+
             // contact api's for data
             await Promise.all([api.getNews(), api.getWeather()])
                 .then(async (results) => {
@@ -125,14 +135,12 @@ module.exports.checkLog = async (req, res, next) => {
                         await db.run(query[0], query[1]);
                     });
 
-                    // update log
-                    const sql = `UPDATE log SET lastCall = ? WHERE id = ? ;`;
-                    // await db.run(sql, [now / 1000, 1]);
                 }).catch(err => {
                     // send service down message in place of data
                     // if service down dislay test screen => funny!! :D:D:D
                     console.log(err.message);
                 });
+
         } else {
 
             // update data
@@ -149,8 +157,11 @@ module.exports.checkLog = async (req, res, next) => {
                         });
                     });
                 });
+
         }
 
+        // update log
+        await updateLog(now / 1000);
     }
 
     return next();
