@@ -17,6 +17,7 @@ const pageFunctions = {
                 const pageNumber = page.children[1];
                 
                 pageNumber.innerText = `${'.'.repeat(trailLength - pageName.length - 1)}${pageNumber.innerText.replaceAll('.','')}`;
+
             }
         }
     },
@@ -24,11 +25,13 @@ const pageFunctions = {
         loadHeadlines: () => {
             const lines = 2;
             for (let i = 0; i < pageVDOM['101'].headlines.length; i++) {
-                if (apidata.news[i].title.length > 32 * lines) {
-                    pageVDOM['101'].headlines[i].innerText = `${apidata.news[i].title.slice(0, (32 * lines) - 3)}...`;
-                } else {
-                    pageVDOM['101'].headlines[i].innerText = apidata.news[i].title;
-                }
+                // if (apidata.news[i].title.length > 32 * lines) {
+                //     pageVDOM['101'].headlines[i].innerText = `${apidata.news[i].title.slice(0, (32 * lines) - 3)}...`;
+                // } else {
+                //     pageVDOM['101'].headlines[i].innerText = apidata.news[i].title;
+                // }
+                pageVDOM['101'].headlines[i].innerText = apidata.news[i].title;
+
             }
         }
     }

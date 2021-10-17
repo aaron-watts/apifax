@@ -134,7 +134,7 @@ Promise.all([fetch('/pages'), fetch('/data')])
         pageTemplates = data[0];
         apidata = data[1];
 
-        programme.display.loadScreen('101');
+        programme.display.loadScreen('100');
     })
     .catch(err => {
         console.log(err.message);
