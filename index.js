@@ -8,7 +8,7 @@ const path = require('path');
 
 const db = require('./utils/db_utils');
 
-const pageTemplates = require('./pages');
+const pageTemplates = require('./templates');
 
 const PORT = 3000;
 
