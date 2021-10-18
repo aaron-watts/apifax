@@ -151,7 +151,7 @@ Promise.all([fetch('/pages'), fetch('/data')])
             };
         }
 
-        programme.display.loadScreen('102');
+        programme.display.loadScreen('103');
     })
     .catch(err => {
         console.log(err.message);

@@ -248,20 +248,44 @@ html {
   border-bottom: 2px solid #f0f;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 20rem 20rem;
-      grid-template-columns: 20rem 20rem;
+  -ms-grid-columns: 14rem 20rem;
+      grid-template-columns: 14rem 20rem;
 }
 
 .p102-12 .p102-12__header--brand {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.p102-12 .p102-12__header--brand span {
   text-transform: uppercase;
-  -webkit-transform: scale(3);
-          transform: scale(3);
+  margin: 0 1rem;
+}
+
+.p102-12 .p102-12__header--brand span:nth-of-type(odd) {
+  -webkit-transform: scaleY(3) scaleX(3) translateY(0.1rem);
+          transform: scaleY(3) scaleX(3) translateY(0.1rem);
   -webkit-transform-origin: top;
           transform-origin: top;
-  text-align: center;
+}
+
+.p102-12 .p102-12__header--brand span:nth-of-type(even) {
+  -webkit-transform: scaleY(3) scaleX(3) translateY(0.2rem);
+          transform: scaleY(3) scaleX(3) translateY(0.2rem);
+  -webkit-transform-origin: top;
+          transform-origin: top;
 }
 
 .p102-12 .p102-12__header--title {
+  background: #0ff;
+}
+
+.p102-12 .p102-12__header--title .text {
   text-transform: capitalize;
   -webkit-transform: scaleY(3) scaleX(2);
           transform: scaleY(3) scaleX(2);

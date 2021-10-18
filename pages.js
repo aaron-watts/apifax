@@ -43,7 +43,8 @@ pageTemplates = {
 </div>
 <footer>How to use the new ApiFax P198</footer>`,
 
-    '101': `<div class="p101__header">
+    '101': `
+<div class="p101__header">
     <span class="p101__header--text">headlines</span>
 </div>
 <ul class="p101__headlines">
@@ -60,9 +61,14 @@ pageTemplates = {
 </ul>
 <footer>ApiFax Index P100</footer>`,
 
-    '102': `<div class="p102-12__header">
-    <div class="p102-12__header--brand">news</div>
-    <div class="p102-12__header--title">stories</div>    
+    '102': `
+<div class="p102-12__header">
+    <div class="p102-12__header--brand">
+        <span>n</span><span>e</span><span>w</span><span>s</span>
+    </div>
+    <div class="p102-12__header--title">
+    <div class="text">stories</div>
+    </div>    
 </div>
 <div class="p102-12__headline">Headline</div>
 <div class="p102-12__story">Story</div>
