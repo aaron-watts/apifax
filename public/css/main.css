@@ -170,8 +170,8 @@ html {
 .p101 {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 4rem auto;
-      grid-template-rows: 4rem auto;
+  -ms-grid-rows: 4rem auto 1rem;
+      grid-template-rows: 4rem auto 1rem;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
 }
@@ -229,6 +229,52 @@ html {
 
 .p101 .p101__headlines li:nth-of-type(odd) span:nth-of-type(1) {
   color: #0ff;
+}
+
+.p101 footer {
+  background: #00f;
+  color: #fff;
+  text-align: center;
+}
+
+.p102-12 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 4rem 1fr 1fr 1rem;
+      grid-template-rows: 4rem 1fr 1fr 1rem;
+}
+
+.p102-12 .p102-12__header {
+  border-bottom: 2px solid #f0f;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 20rem 20rem;
+      grid-template-columns: 20rem 20rem;
+}
+
+.p102-12 .p102-12__header--brand {
+  text-transform: uppercase;
+  -webkit-transform: scale(3);
+          transform: scale(3);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  text-align: center;
+}
+
+.p102-12 .p102-12__header--title {
+  text-transform: capitalize;
+  -webkit-transform: scaleY(3) scaleX(2);
+          transform: scaleY(3) scaleX(2);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.p102-12 .p102-12__headline {
+  text-transform: capitalize;
+  -webkit-transform: scaleY(2);
+          transform: scaleY(2);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
 }
 
 header .clock {

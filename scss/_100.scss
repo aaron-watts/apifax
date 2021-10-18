@@ -46,18 +46,15 @@
     #{&}__contents {
         display: grid;
         grid-auto-rows: 25%;
-        // grid-auto-columns: 80%;
         justify-items: center;
-        // align-items: stretch;
+        // align-content: space-around;
         text-transform: uppercase;
-        // background: $green;
 
 
         & ul {
             display: flex;
             flex-direction: column;
             width: 80%;
-            // justify-content: flex-end;
             line-height: 1.8rem;
             align-items: center;
 
@@ -66,7 +63,6 @@
                 width: 100%;
                 flex-direction: row;
                 justify-content: space-between;
-                // align-content:stretch;
 
                 & span {
                     display: block;
@@ -82,12 +78,10 @@
             }
 
             &:nth-of-type(even) {
-                // background: $red;
                 min-height: calc(1.2rem * 7);
             }
 
             &:nth-of-type(odd) {
-                // background: $red;
                 min-height: calc(1.2rem * 5);
             }
         }

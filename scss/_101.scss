@@ -1,6 +1,6 @@
 .p101 {
     display: grid;
-    grid-template-rows: 4rem auto;
+    grid-template-rows: 4rem auto 1rem;
     grid-template-columns: 1fr;
 
     #{&}__header {
@@ -50,5 +50,11 @@
                 color: $cyan;
             }
         }
+    }
+
+    footer {
+        background: $blue;
+        color: $white;
+        text-align: center;
     }
 }

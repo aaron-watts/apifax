@@ -1,4 +1,4 @@
-module.exports = {
+pageTemplates = {
     '100': `
 <div class=\"p100__brand\">
     <span>a</span><span>p</span><span>i</span><span>f</span><span>a</span><span>x</span>
@@ -42,6 +42,7 @@ module.exports = {
     </ul>
 </div>
 <footer>How to use the new ApiFax P198</footer>`,
+
     '101': `<div class="p101__header">
     <span class="p101__header--text">headlines</span>
 </div>
@@ -56,5 +57,23 @@ module.exports = {
     <li><span>Headline</span><span>P109</span></li>
     <li><span>Headline</span><span>P110</span></li>
     <li><span>Headline</span><span>P111</span></li>
-</ul>`
+</ul>
+<footer>ApiFax Index P100</footer>`,
+
+    '102': `<div class="p102-12__header">
+    <div class="p102-12__header--brand">news</div>
+    <div class="p102-12__header--title">stories</div>    
+</div>
+<div class="p102-12__headline">Headline</div>
+<div class="p102-12__story">Story</div>
+<footer>ApiFax Index P100</footer>`,
+    
 }
+
+// for (let i = 3; i <= 12; i++) {
+//     let index = i < 10 ? `0${i}` : i;
+//     pageTemplates[`1${index}`] = pageTemplates['102']
+//     // pageTemplates[`1${index}`] = () => pageTemplates['102'];
+// }
+
+module.exports = {pageTemplates};

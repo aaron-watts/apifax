@@ -1,0 +1,29 @@
+.p102-12 {
+    display: grid;
+    grid-template-rows: 4rem 1fr 1fr 1rem;
+
+    #{&}__header {
+        border-bottom: 2px solid $magenta;
+        display: grid;
+        grid-template-columns: 20rem 20rem;
+
+        &--brand {
+            text-transform: uppercase;
+            transform: scale(3);
+            transform-origin: top;
+            text-align: center;
+        }
+
+        &--title {
+            text-transform: capitalize;
+            transform: scaleY(3) scaleX(2);
+            transform-origin: top left;
+        }
+    }
+
+    #{&}__headline {
+        text-transform: capitalize;
+        transform: scaleY(2);
+        transform-origin: top left;
+    }
+}
