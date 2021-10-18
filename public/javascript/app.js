@@ -130,6 +130,7 @@ Promise.all([fetch('/pages'), fetch('/data')])
         return Promise.all([res[0].json(), res[1].json()])
     })
     .then(data => {
+        console.log(data);
         pageTemplates = data[0];
         apidata = data[1];
 
@@ -138,3 +139,29 @@ Promise.all([fetch('/pages'), fetch('/data')])
     .catch(err => {
         console.log(err.message);
     })
+
+// fetch('/pages')
+//     .then(res => {
+//         console.log('Page Templates Received!\nParsing...');
+//         return res.json()
+//     })
+//     .then(data => {
+//         pageTemplates = data;
+        
+//         console.log('Page Templates Parsed!');
+//         // programme.display.loadScreen('100');
+//         fetch('/data')
+//             .then(res => {
+//                 console.log('API Data Received!\nParsing...');
+//                 console.log(`Response: ${res}`)
+//                 return res;
+//             })
+//             .then(data => {
+//                 console.log('API Data Parsed!');
+//                 apidata = data;
+//                 programme.display.loadScreen('101');
+//             })
+//             .catch(err => {
+//                 console.log(err.message);
+//             })
+//     })
