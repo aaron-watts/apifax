@@ -237,14 +237,14 @@ html {
   text-align: center;
 }
 
-.p102-12 {
+.p102-11 {
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 4rem 1fr 1fr 1rem;
       grid-template-rows: 4rem 1fr 1fr 1rem;
 }
 
-.p102-12 .p102-12__header {
+.p102-11 .p102-11__header {
   border-bottom: 2px solid #f0f;
   display: -ms-grid;
   display: grid;
@@ -252,7 +252,7 @@ html {
       grid-template-columns: 14rem 20rem;
 }
 
-.p102-12 .p102-12__header--brand {
+.p102-11 .p102-11__header--brand {
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -262,30 +262,30 @@ html {
           justify-content: center;
 }
 
-.p102-12 .p102-12__header--brand span {
+.p102-11 .p102-11__header--brand span {
   text-transform: uppercase;
   margin: 0 1rem;
 }
 
-.p102-12 .p102-12__header--brand span:nth-of-type(odd) {
+.p102-11 .p102-11__header--brand span:nth-of-type(odd) {
   -webkit-transform: scaleY(3) scaleX(3) translateY(0.1rem);
           transform: scaleY(3) scaleX(3) translateY(0.1rem);
   -webkit-transform-origin: top;
           transform-origin: top;
 }
 
-.p102-12 .p102-12__header--brand span:nth-of-type(even) {
+.p102-11 .p102-11__header--brand span:nth-of-type(even) {
   -webkit-transform: scaleY(3) scaleX(3) translateY(0.2rem);
           transform: scaleY(3) scaleX(3) translateY(0.2rem);
   -webkit-transform-origin: top;
           transform-origin: top;
 }
 
-.p102-12 .p102-12__header--title {
+.p102-11 .p102-11__header--title {
   background: #0ff;
 }
 
-.p102-12 .p102-12__header--title .text {
+.p102-11 .p102-11__header--title .text {
   text-transform: capitalize;
   -webkit-transform: scaleY(3) scaleX(2);
           transform: scaleY(3) scaleX(2);
@@ -293,7 +293,7 @@ html {
           transform-origin: top left;
 }
 
-.p102-12 .p102-12__headline {
+.p102-11 .p102-11__headline {
   text-transform: capitalize;
   -webkit-transform: scaleY(2);
           transform: scaleY(2);

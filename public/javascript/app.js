@@ -6,8 +6,10 @@ const channel = header.children[0];
 const scans = header.children[1];
 const scannerInterface = scans.children[0];
 
-// clock object to handle date/time in header and to provide a counter
-// for scroll events where multiple pages exist
+/*
+A clock object to handle date/time in header and to provide a counter
+for timed events such as slide changes
+*/
 const clock = {
     ticker: 0,
     tick: () => {
@@ -28,9 +30,15 @@ const clock = {
 
 setInterval(clock.tick, 1000);
 
+/*
+The broadcasting object - to fill the role of the TV and receiver
+*/
 const programme = {
     currentPage: '100',
     display: {
+        /*
+        Remove page contents from display, scanner/header is preserved
+        */
         clearScreen: () => {
             for (let listener in pageListeners[programme.currentPage]) {
                 window.removeEventListener(
@@ -40,11 +48,17 @@ const programme = {
             }
             document.querySelectorAll('main, footer').forEach(i => { i.remove() });
         },
+        /*
+        - Load relevant page template into document
+        - reinitialise any relevant DOM that will have been lost in a clear screen
+        - reinitialise page functions
+        - reinitialise page's event listeners
+        */
         loadScreen: (pageNumber) => {
             const pageInt = parseInt(pageNumber);
 
-            // may use a switch case later
-            let mainClass = pageInt >= 102 && pageInt <= 112 ? `102-12` : pageNumber;
+            // may use a switch case later when there are more sets of 'alike' pages
+            let mainClass = pageInt >= 102 && pageInt <= 111 ? `102-11` : pageNumber;
 
             const body = document.querySelector('body');
             const main = document.createElement('main');
@@ -52,13 +66,12 @@ const programme = {
             main.classList.add(`p${mainClass}`);
             body.appendChild(main);
 
-            // cache dom for function reference
             cacheDOM[pageNumber]();
-            // execute functions and define for event listeners
+            
             for (let fn in pageFunctions[pageNumber]) {
                 pageFunctions[pageNumber][fn]();
             }
-            // add eventlisteners
+            
             for (let listener in pageListeners[pageNumber]) {
                 window.addEventListener(
                     pageListeners[pageNumber][listener][0],
@@ -68,6 +81,15 @@ const programme = {
         }
     },
     scanner: {
+        /*
+        The app pretends that it cannot jump straight into the page (teehee)
+        to emulate behaviour of teletext scanning for a new channel
+        Also serves as a way to annoy site visitors and reduce traffic, though
+        this was never my intention
+
+        NOTE: This is not clearing the timeout on a second channel input,
+        app-breaking-bug! must fix
+        */
         climb: (pageN) => {
             if (scannerInterface.innerText !== pageN) {
                 if (!(parseInt(scannerInterface.innerText) % parseInt(`${pageN[0]}99`))) {
@@ -96,16 +118,21 @@ const programme = {
             }
             return;
         },
+        /*
+        A quick class change in the header before the yummy recursion
+        */
         scan: (pageNumber) => {
             scans.classList.add('green');
-
             // make the numbers match the hundred digit
             scannerInterface.innerText = (parseInt(pageNumber) + 1).toString();
-
             // starting one above the hundred digit go up until loops to this number
             programme.scanner.climb(pageNumber);
         }
     },
+    /*
+    Manages the channel input event listener and sends signal to 
+    scanner.scan when 3 digits entered
+    */
     channelInput: (n) => {
         if (channel.innerText.indexOf('-') >= 0) {
             let pageString = channel.innerText.replace('-', n);
@@ -138,20 +165,9 @@ Promise.all([fetch('/pages'), fetch('/data')])
         pageTemplates = data[0];
         apidata = data[1];
 
-        for (let i = 2; i <= 11; i++) {
-            let index = i < 10 ? `0${i}` : i;
+        buildNewsPages(apidata.news); // pageFunctions.js
 
-            pageTemplates[`1${index}`] = pageTemplates['102'];
-
-            // build customised functions for news pages
-            pageFunctions[`1${index}`] = {};
-            pageFunctions[`1${index}`].loadStory = (index = i - 2) => {
-                pageVDOM['102-12'].headline.innerText = apidata.news[index].title;
-                pageVDOM['102-12'].story.innerText = apidata.news[index].description;
-            };
-        }
-
-        programme.display.loadScreen('103');
+        programme.display.loadScreen('104');
     })
     .catch(err => {
         console.log(err.message);

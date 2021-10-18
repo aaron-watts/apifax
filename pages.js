@@ -62,24 +62,18 @@ pageTemplates = {
 <footer>ApiFax Index P100</footer>`,
 
     '102': `
-<div class="p102-12__header">
-    <div class="p102-12__header--brand">
+<div class="p102-11__header">
+    <div class="p102-11__header--brand">
         <span>n</span><span>e</span><span>w</span><span>s</span>
     </div>
-    <div class="p102-12__header--title">
+    <div class="p102-11__header--title">
     <div class="text">stories</div>
     </div>    
 </div>
-<div class="p102-12__headline">Headline</div>
-<div class="p102-12__story">Story</div>
+<div class="p102-11__headline">Headline</div>
+<div class="p102-11__story">Story</div>
 <footer>ApiFax Index P100</footer>`,
     
 }
-
-// for (let i = 3; i <= 12; i++) {
-//     let index = i < 10 ? `0${i}` : i;
-//     pageTemplates[`1${index}`] = pageTemplates['102']
-//     // pageTemplates[`1${index}`] = () => pageTemplates['102'];
-// }
 
 module.exports = {pageTemplates};
