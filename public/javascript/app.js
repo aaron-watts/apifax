@@ -41,10 +41,15 @@ const programme = {
             document.querySelectorAll('main, footer').forEach(i => { i.remove() });
         },
         loadScreen: (pageNumber) => {
+            const pageInt = parseInt(pageNumber);
+
+            // may use a switch case later
+            let mainClass = pageInt >= 102 && pageInt <= 112 ? `102-12` : pageNumber;
+
             const body = document.querySelector('body');
             const main = document.createElement('main');
             main.innerHTML = pageTemplates[pageNumber];
-            main.classList.add(`p${pageNumber}`);
+            main.classList.add(`p${mainClass}`);
             body.appendChild(main);
 
             // cache dom for function reference
@@ -130,38 +135,25 @@ Promise.all([fetch('/pages'), fetch('/data')])
         return Promise.all([res[0].json(), res[1].json()])
     })
     .then(data => {
-        console.log(data);
         pageTemplates = data[0];
         apidata = data[1];
 
-        programme.display.loadScreen('101');
+        for (let i = 2; i <= 11; i++) {
+            let index = i < 10 ? `0${i}` : i;
+
+            pageTemplates[`1${index}`] = pageTemplates['102'];
+
+            // build customised functions for news pages
+            pageFunctions[`1${index}`] = {};
+            pageFunctions[`1${index}`].loadStory = (index = i - 2) => {
+                pageVDOM['102-12'].headline.innerText = apidata.news[index].title;
+                pageVDOM['102-12'].story.innerText = apidata.news[index].description;
+            };
+        }
+
+        programme.display.loadScreen('103');
     })
     .catch(err => {
         console.log(err.message);
     })
 
-// fetch('/pages')
-//     .then(res => {
-//         console.log('Page Templates Received!\nParsing...');
-//         return res.json()
-//     })
-//     .then(data => {
-//         pageTemplates = data;
-        
-//         console.log('Page Templates Parsed!');
-//         // programme.display.loadScreen('100');
-//         fetch('/data')
-//             .then(res => {
-//                 console.log('API Data Received!\nParsing...');
-//                 console.log(`Response: ${res}`)
-//                 return res;
-//             })
-//             .then(data => {
-//                 console.log('API Data Parsed!');
-//                 apidata = data;
-//                 programme.display.loadScreen('101');
-//             })
-//             .catch(err => {
-//                 console.log(err.message);
-//             })
-//     })

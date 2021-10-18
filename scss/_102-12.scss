@@ -1,0 +1,52 @@
+.p102-12 {
+    display: grid;
+    grid-template-rows: 4rem 1fr 1fr 1rem;
+
+    #{&}__header {
+        border-bottom: 2px solid $magenta;
+        display: grid;
+        grid-template-columns: 14rem 20rem;
+
+        &--brand {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            // background-color: $magenta;
+
+            & span {
+                text-transform: uppercase;
+                margin: 0 1rem;
+                
+                // transform: scale(3) translateY(.2rem);
+                // transform-origin: top;
+
+                &:nth-of-type(odd) {
+                    // display: block;
+                    transform: scaleY(3) scaleX(3) translateY(.1rem);
+                    transform-origin: top;
+                }
+                &:nth-of-type(even) {
+                    // display: block;
+                    transform: scaleY(3) scaleX(3) translateY(.2rem);
+                    transform-origin: top;
+                }
+            }
+        }
+
+        &--title {
+            background: $cyan;
+
+            & .text {
+                text-transform: capitalize;
+                transform: scaleY(3) scaleX(2);
+                transform-origin: top left;
+            }
+        }
+    }
+
+    #{&}__headline {
+        text-transform: capitalize;
+        transform: scaleY(2);
+        transform-origin: top left;
+    }
+}

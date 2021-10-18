@@ -1,6 +1,6 @@
 .p101 {
     display: grid;
-    grid-template-rows: 4rem auto;
+    grid-template-rows: 4rem auto 1rem;
     grid-template-columns: 1fr;
 
     #{&}__header {
@@ -24,26 +24,37 @@
         width: 100%;
         display: grid;
         grid-template-rows: repeat(10, 1fr);
+        justify-items: center;
 
         & li {
             display: flex;
             width: 38rem;
             justify-content: space-between;
 
+            line-height: 1.2rem;
+
             & span:nth-of-type(1) {
                 width: 32rem;
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2; /* number of lines to show */
+                -webkit-box-orient: vertical;
+
+                max-height: 2.4rem;
+                
             }
 
             &:nth-of-type(odd) span:nth-of-type(1) {
                 color: $cyan;
             }
-
-            // &:nth-of-type(1),
-            // &:nth-of-type(5) {
-            //     transform-origin: top left;;
-            //     transform: scaleY(2);
-            // }
         }
+    }
 
+    footer {
+        background: $blue;
+        color: $white;
+        text-align: center;
     }
 }

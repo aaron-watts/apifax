@@ -1,6 +1,7 @@
 @import 'config';
 @import '100';
 @import '101';
+@import '102-12';
 
 header {
     & .clock {
@@ -21,4 +22,14 @@ body {
     grid-template-rows: 1rem auto;
     grid-template-columns: 1fr;
     height: 100vh;
+}
+
+@include media-lg {
+    * {
+        font-size: 21px;
+    }
+
+    header, body > * {
+        margin: 0 auto;
+    }
 }
