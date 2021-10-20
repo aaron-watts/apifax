@@ -67,8 +67,17 @@ const pageFunctions = {
     '400': {
         loadTemps: () => {
             apidata.weather.forEach(forecast => {
-                pageVDOM['400'].temps[forecast.city].innerText = forecast.temp;
+                const temp = forecast.temp < 10 ? `0${forecast.temp}` : forecast.temp
+                pageVDOM['400'].temps[forecast.city].innerText = temp;
             })
+        },
+        loadSummary: (index = 0) => {
+            let i = programme.currentSlide + 1 || index;
+            if (i > 6) i = 0;
+            pageVDOM['400'].city.innerText = apidata.weather[i].city;
+            pageVDOM['400'].description.innerText = apidata.weather[i].description;
+            pageVDOM['400'].pageCount.innerText = i + 1;
+            programme.currentSlide = i;
         }
     },
 }

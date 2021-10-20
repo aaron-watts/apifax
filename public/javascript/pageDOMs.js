@@ -33,7 +33,10 @@ const cacheDOM = {
             belfast: document.querySelector('.p400__forecast--weather-map--temp#belfast'),
             dumfries: document.querySelector('.p400__forecast--weather-map--temp#dumfries'),
             inverness: document.querySelector('.p400__forecast--weather-map--temp#inverness'),
-        }
+        },
+        pageVDOM['400'].city = document.querySelector('.p400__forecast--summary .city'),
+        pageVDOM['400'].description = document.querySelector('.p400__forecast--summary .description'),
+        pageVDOM['400'].pageCount = document.querySelector('.p400__footer span.slide');
     }
 }
 

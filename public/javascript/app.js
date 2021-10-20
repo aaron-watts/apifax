@@ -25,6 +25,17 @@ const clock = {
 
         clock.ticker++;
         if (clock.ticker > 60) clock.ticker = 1;
+
+        // create timer event
+        if (clock.ticker % 15 === 0) {
+            clock.event = new CustomEvent('turnpage', {
+                bubbles: false,
+                cancelable: false,
+                detail: null
+            });
+            
+            document.dispatchEvent(clock.event);
+        }
     }
 };
 
@@ -41,12 +52,13 @@ const programme = {
         */
         clearScreen: () => {
             for (let listener in pageListeners[programme.currentPage]) {
-                window.removeEventListener(
-                    pageListeners[programme.currentPage][listener][0],
-                    pageListeners[programme.currentPage][listener][1]
+                pageListeners[programme.currentPage][listener][0].removeEventListener(
+                    pageListeners[programme.currentPage][listener][1],
+                    pageListeners[programme.currentPage][listener][2]
                 )
             }
             document.querySelectorAll('main, footer').forEach(i => { i.remove() });
+            delete programme.currentSlide;
         },
         /*
         - Load relevant page template into document
@@ -72,10 +84,15 @@ const programme = {
                 pageFunctions[pageNumber][fn]();
             }
             
+            /*
+            PageListeners are constructed in arrays of:
+            [ event host, event name, callback ]
+            Host describes the location of the event, i.e. window, document, etc
+            */
             for (let listener in pageListeners[pageNumber]) {
-                window.addEventListener(
-                    pageListeners[pageNumber][listener][0],
-                    pageListeners[pageNumber][listener][1]
+                pageListeners[pageNumber][listener][0].addEventListener(
+                    pageListeners[pageNumber][listener][1],
+                    pageListeners[pageNumber][listener][2]
                 )
             }
         }

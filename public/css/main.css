@@ -22,11 +22,13 @@ main {
   min-width: 40rem;
 }
 
+.green {
+  color: #0f0 !important;
+}
+
 .ascii-art {
   font-family: monospace;
   white-space: pre;
-  color: #fff;
-  font-size: 2rem;
 }
 
 .p100 {
@@ -318,23 +320,65 @@ main {
   display: grid;
   -ms-grid-rows: auto 1rem;
       grid-template-rows: auto 1rem;
+  position: relative;
+}
+
+.p400 .p400__header {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  text-transform: uppercase;
+  -webkit-transform: scale(3);
+          transform: scale(3);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  color: #0ff;
+  text-shadow: #000 0.1rem 0.1rem;
+}
+
+.p400 .p400__footer {
+  text-align: center;
 }
 
 .p400 .p400__forecast {
   background: #00f;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 2fr 6fr;
-      grid-template-rows: 2fr 6fr;
+  -ms-grid-rows: 1fr 4fr;
+      grid-template-rows: 1fr 4fr;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
   justify-items: center;
 }
 
 .p400 .p400__forecast--summary {
+  margin-top: 2rem;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  text-align: right;
+  width: 38rem;
+  text-shadow: #000 0.1rem 0.1rem;
+}
+
+.p400 .p400__forecast--summary .city {
+  text-transform: uppercase;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+  -webkit-transform: scale(2);
+          transform: scale(2);
+  color: #ff0;
+}
+
+.p400 .p400__forecast--summary .description {
+  margin-top: 1rem;
+  text-transform: capitalize;
+  color: #fff;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+  -webkit-transform: scaleY(2);
+          transform: scaleY(2);
+  height: 2rem;
 }
 
 .p400 .p400__forecast--weather-map {
@@ -345,6 +389,7 @@ main {
   width: fit-content;
   height: 37rem;
   text-shadow: #000 -0.2rem 0.2rem;
+  font-size: 2rem;
 }
 
 .p400 .p400__forecast--weather-map--temp {
@@ -399,6 +444,9 @@ main {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+  .p400 .p400__forecast--summary {
+    width: 18rem;
   }
   .p400 .p400__forecast--weather-map {
     font-size: 1.4rem;

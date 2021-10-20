@@ -48,16 +48,16 @@ pageTemplates = {
     <span class="p101__header--text">headlines</span>
 </div>
 <ul class="p101__headlines">
-    <li><span>Headline</span><span>P102</span></li>
-    <li><span>Headline</span><span>P103</span></li>
-    <li><span>Headline</span><span>P104</span></li>
-    <li><span>Headline</span><span>P105</span></li>
-    <li><span>Headline</span><span>P106</span></li>
-    <li><span>Headline</span><span>P107</span></li>
-    <li><span>Headline</span><span>P108</span></li>
-    <li><span>Headline</span><span>P109</span></li>
-    <li><span>Headline</span><span>P110</span></li>
-    <li><span>Headline</span><span>P111</span></li>
+    <li><span></span><span>P102</span></li>
+    <li><span></span><span>P103</span></li>
+    <li><span></span><span>P104</span></li>
+    <li><span></span><span>P105</span></li>
+    <li><span></span><span>P106</span></li>
+    <li><span></span><span>P107</span></li>
+    <li><span></span><span>P108</span></li>
+    <li><span></span><span>P109</span></li>
+    <li><span></span><span>P110</span></li>
+    <li><span></span><span>P111</span></li>
 </ul>
 <footer>ApiFax Index P100</footer>`,
 
@@ -75,9 +75,11 @@ pageTemplates = {
 <footer>ApiFax Index P100</footer>`,
     
     '400' : `
+<div class="p400__header">weather</div>
 <div class="p400__forecast">
     <div class="p400__forecast--summary">
-        Blustery Showers No Less!
+        <div class="city"></div>
+        <div class="description"></div>
     </div>
     <div class="ascii-art p400__forecast--weather-map">
   &#9622; &#9625;&#9608;&#9625;
@@ -95,16 +97,16 @@ pageTemplates = {
     &#9623;&#9631;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9627;
     &#9631;&#9627;&#9627;&#9600;&#9600;&#9600;&#9600;&#9620;&#9620;&#9620;&#9620;
     &#9629;
-<div class="p400__forecast--weather-map--temp london" id="london">16</div>
-<div class="p400__forecast--weather-map--temp belfast" id="belfast">16</div>
-<div class="p400__forecast--weather-map--temp exeter" id="exeter">16</div>
-<div class="p400__forecast--weather-map--temp birmingham" id="birmingham">16</div>
-<div class="p400__forecast--weather-map--temp blackpool" id="blackpool">16</div>
-<div class="p400__forecast--weather-map--temp dumfries" id="dumfries">16</div>
-<div class="p400__forecast--weather-map--temp inverness" id="inverness">16</div>
+<div class="p400__forecast--weather-map--temp london" id="london"></div>
+<div class="p400__forecast--weather-map--temp belfast" id="belfast"></div>
+<div class="p400__forecast--weather-map--temp exeter" id="exeter"></div>
+<div class="p400__forecast--weather-map--temp birmingham" id="birmingham"></div>
+<div class="p400__forecast--weather-map--temp blackpool" id="blackpool"></div>
+<div class="p400__forecast--weather-map--temp dumfries" id="dumfries"></div>
+<div class="p400__forecast--weather-map--temp inverness" id="inverness"></div>
     </div>
 </div>
-<div class="p400__footer">1 / 7</div>`
+<div class="p400__footer"><span class="slide">1</span> / 7</div>`
 }
 
 module.exports = {pageTemplates};
