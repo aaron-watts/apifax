@@ -74,6 +74,37 @@ pageTemplates = {
 <div class="p102-11__story">Story</div>
 <footer>ApiFax Index P100</footer>`,
     
+    '400' : `
+<div class="p400__forecast">
+    <div class="p400__forecast--summary">
+        Blustery Showers No Less!
+    </div>
+    <div class="ascii-art p400__forecast--weather-map">
+  &#9622; &#9625;&#9608;&#9625;
+    &#9628;&#9608;&#9608;&#9608;
+    &#9631;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9627;
+    &#9631;&#9608;&#9608;&#9608;&#9608;&#9608;&#9627;
+    &#9631;&#9608;&#9608;&#9608;&#9608;&#9608;&#9625;
+&#9623;&#9605;&#9622; &#9624; &#9608;&#9608;&#9608;&#9608;&#9608;&#9625;
+&#9628;&#9608;&#9608;&#9627; &#9624; &#9628;&#9608;&#9608;&#9608;&#9625;
+    &#9624;    &#9628;&#9608;&#9608;&#9608;&#9625;&#9622;
+      &#9622; &#9631;&#9608;&#9608;&#9608;&#9608;&#9608;
+      &#9628;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9627;
+      &#9628;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9622;
+    &#9628;&#9600;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9627;&#9600;
+    &#9623;&#9631;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9627;
+    &#9631;&#9627;&#9627;&#9600;&#9600;&#9600;&#9600;&#9620;&#9620;&#9620;&#9620;
+    &#9629;
+<div class="p400__forecast--weather-map--temp london" id="london">16</div>
+<div class="p400__forecast--weather-map--temp belfast" id="belfast">16</div>
+<div class="p400__forecast--weather-map--temp exeter" id="exeter">16</div>
+<div class="p400__forecast--weather-map--temp birmingham" id="birmingham">16</div>
+<div class="p400__forecast--weather-map--temp blackpool" id="blackpool">16</div>
+<div class="p400__forecast--weather-map--temp dumfries" id="dumfries">16</div>
+<div class="p400__forecast--weather-map--temp inverness" id="inverness">16</div>
+    </div>
+</div>
+<div class="p400__footer">1 / 7</div>`
 }
 
 module.exports = {pageTemplates};

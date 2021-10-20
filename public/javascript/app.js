@@ -167,7 +167,7 @@ Promise.all([fetch('/pages'), fetch('/data')])
 
         buildNewsPages(apidata.news); // pageFunctions.js
 
-        programme.display.loadScreen('104');
+        programme.display.loadScreen('400');
     })
     .catch(err => {
         console.log(err.message);

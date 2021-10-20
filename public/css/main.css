@@ -5,7 +5,6 @@
           box-sizing: border-box;
   overflow: hidden;
   font-family: 'Press Start 2P', monospace;
-  color: #fff;
   font-size: 2.48vw;
 }
 
@@ -16,10 +15,18 @@ html {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  color: #fff;
 }
 
-.green {
-  color: #0f0 !important;
+main {
+  min-width: 40rem;
+}
+
+.ascii-art {
+  font-family: monospace;
+  white-space: pre;
+  color: #fff;
+  font-size: 2rem;
 }
 
 .p100 {
@@ -248,8 +255,8 @@ html {
   border-bottom: 2px solid #f0f;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 14rem 20rem;
-      grid-template-columns: 14rem 20rem;
+  -ms-grid-columns: 18rem 22rem;
+      grid-template-columns: 18rem 22rem;
 }
 
 .p102-11 .p102-11__header--brand {
@@ -260,11 +267,14 @@ html {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background: #f0f;
+  color: #000;
 }
 
 .p102-11 .p102-11__header--brand span {
   text-transform: uppercase;
   margin: 0 1rem;
+  text-shadow: #0ff -0.1rem 0.1rem;
 }
 
 .p102-11 .p102-11__header--brand span:nth-of-type(odd) {
@@ -282,15 +292,17 @@ html {
 }
 
 .p102-11 .p102-11__header--title {
-  background: #0ff;
+  color: #f0f;
+  text-align: center;
+  text-shadow: #0ff 0.1rem -0.1rem;
 }
 
 .p102-11 .p102-11__header--title .text {
   text-transform: capitalize;
-  -webkit-transform: scaleY(3) scaleX(2);
-          transform: scaleY(3) scaleX(2);
-  -webkit-transform-origin: top left;
-          transform-origin: top left;
+  -webkit-transform: scaleY(3) scaleX(3) translateY(0.2rem);
+          transform: scaleY(3) scaleX(3) translateY(0.2rem);
+  -webkit-transform-origin: top;
+          transform-origin: top;
 }
 
 .p102-11 .p102-11__headline {
@@ -299,6 +311,126 @@ html {
           transform: scaleY(2);
   -webkit-transform-origin: top left;
           transform-origin: top left;
+}
+
+.p400 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1rem;
+      grid-template-rows: auto 1rem;
+}
+
+.p400 .p400__forecast {
+  background: #00f;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 2fr 6fr;
+      grid-template-rows: 2fr 6fr;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.p400 .p400__forecast--summary {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.p400 .p400__forecast--weather-map {
+  color: #0f0;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 37rem;
+  text-shadow: #000 -0.2rem 0.2rem;
+}
+
+.p400 .p400__forecast--weather-map--temp {
+  background: #000;
+  color: #fff;
+  position: absolute;
+  display: inline;
+  font-size: .5em;
+}
+
+.p400 .p400__forecast--weather-map .london {
+  top: 81%;
+  left: 72.5%;
+}
+
+.p400 .p400__forecast--weather-map .belfast {
+  top: 45%;
+  left: 5%;
+}
+
+.p400 .p400__forecast--weather-map .exeter {
+  top: 87%;
+  left: 32.5%;
+}
+
+.p400 .p400__forecast--weather-map .birmingham {
+  top: 68%;
+  left: 50%;
+}
+
+.p400 .p400__forecast--weather-map .blackpool {
+  top: 52%;
+  left: 55%;
+}
+
+.p400 .p400__forecast--weather-map .dumfries {
+  top: 40%;
+  left: 35%;
+}
+
+.p400 .p400__forecast--weather-map .inverness {
+  top: 22%;
+  left: 40%;
+}
+
+@media screen and (min-width: 580px) {
+  .p400 .p400__forecast {
+    -ms-grid-rows: 1fr;
+        grid-template-rows: 1fr;
+    -ms-grid-columns: 20rem 20rem;
+        grid-template-columns: 20rem 20rem;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .p400 .p400__forecast--weather-map {
+    font-size: 1.4rem;
+  }
+  .p400 .p400__forecast--weather-map .london {
+    top: 58%;
+    left: 72.5%;
+  }
+  .p400 .p400__forecast--weather-map .belfast {
+    top: 32%;
+    left: 5%;
+  }
+  .p400 .p400__forecast--weather-map .exeter {
+    top: 62%;
+    left: 32.5%;
+  }
+  .p400 .p400__forecast--weather-map .birmingham {
+    top: 50%;
+    left: 50%;
+  }
+  .p400 .p400__forecast--weather-map .blackpool {
+    top: 39%;
+    left: 55%;
+  }
+  .p400 .p400__forecast--weather-map .dumfries {
+    top: 28%;
+    left: 35%;
+  }
+  .p400 .p400__forecast--weather-map .inverness {
+    top: 15%;
+    left: 40%;
+  }
 }
 
 header .clock {

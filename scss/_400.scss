@@ -1,0 +1,123 @@
+.p400 {
+    display: grid;
+    grid-template-rows: auto 1rem;
+
+    #{&}__forecast {
+        background: $blue;
+        display: grid;
+        grid-template-rows: 2fr 6fr;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        // align-items: center;
+
+        &--summary {
+            align-self: center;
+        }
+
+        &--weather-map {
+            color: $green;
+            position: relative;
+            width: fit-content;
+            height: 37rem;
+            text-shadow: $black -.2rem .2rem;
+            // height: 30rem;
+            // align-self: flex-start;
+
+            &--temp {
+                background: $black;
+                color: $white;
+                position: absolute;
+                display: inline;
+                font-size: .5em;
+            }
+
+            & .london {
+                top: 81%;
+                left: 72.5%;
+            }
+
+            & .belfast {
+                top: 45%;
+                left: 5%;
+            }
+
+            & .exeter {
+                top: 87%;
+                left: 32.5%;
+            }
+
+            & .birmingham {
+                top: 68%;
+                left: 50%;
+            }
+
+            & .blackpool {
+                top: 52%;
+                left: 55%;
+            }
+
+            & .dumfries {
+                top: 40%;
+                left: 35%;
+            }
+
+            & .inverness {
+                top: 22%;
+                left: 40%;
+            }
+        }
+    }
+}
+
+@include media-md {
+    .p400 {
+        #{&}__forecast {
+            grid-template-rows: 1fr;
+            grid-template-columns: 20rem 20rem;
+            align-items: center;
+    
+            &--summary {
+                // align-self: center;
+            }
+    
+            &--weather-map {
+                font-size: 1.4rem;
+    
+                & .london {
+                    top: 58%;
+                    left: 72.5%;
+                }
+        
+                & .belfast {
+                    top: 32%;
+                    left: 5%;
+                }
+        
+                & .exeter {
+                    top: 62%;
+                    left: 32.5%;
+                }
+        
+                & .birmingham {
+                    top: 50%;
+                    left: 50%;
+                }
+        
+                & .blackpool {
+                    top: 39%;
+                    left: 55%;
+                }
+        
+                & .dumfries {
+                    top: 28%;
+                    left: 35%;
+                }
+        
+                & .inverness {
+                    top: 15%;
+                    left: 40%;
+                }
+            }
+        }
+    }
+}

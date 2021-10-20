@@ -5,17 +5,19 @@
     #{&}__header {
         border-bottom: 2px solid $magenta;
         display: grid;
-        grid-template-columns: 14rem 20rem;
+        grid-template-columns: 18rem 22rem;
 
         &--brand {
             text-align: center;
             display: flex;
             justify-content: center;
-            // background-color: $magenta;
+            background: $magenta;
+            color: $black;
 
             & span {
                 text-transform: uppercase;
                 margin: 0 1rem;
+                text-shadow: $cyan -.1rem .1rem;
                 
                 // transform: scale(3) translateY(.2rem);
                 // transform-origin: top;
@@ -34,12 +36,15 @@
         }
 
         &--title {
-            background: $cyan;
+            color: $magenta;
+            // justify-self: center;
+            text-align: center;
+            text-shadow: $cyan .1rem -.1rem;
 
             & .text {
                 text-transform: capitalize;
-                transform: scaleY(3) scaleX(2);
-                transform-origin: top left;
+                transform: scaleY(3) scaleX(3) translateY(.2rem);
+                transform-origin: top;
             }
         }
     }

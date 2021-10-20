@@ -15,7 +15,6 @@ $magenta: #f0f;
     box-sizing: border-box;
     overflow: hidden;
     font-family: 'Press Start 2P', monospace;
-    color: #fff;
     font-size: 2.48vw;
 }
 
@@ -23,10 +22,18 @@ html {
     background: #000;
     cursor: default;
     user-select: none;
+    color: #fff;
 }
 
-.green {
-    color: $green !important;
+main {
+    min-width: 40rem;
+}
+
+.ascii-art {
+    font-family: monospace;
+    white-space: pre;
+    color: $white;
+    font-size: 2rem;
 }
 
 @mixin media-md {

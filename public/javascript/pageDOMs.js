@@ -23,6 +23,18 @@ const cacheDOM = {
     /*
     103-111 are generated in buildnews pages function in pagefunctions.js
     */
+
+    '400': () => {
+        pageVDOM['400'].temps = {
+            london: document.querySelector('.p400__forecast--weather-map--temp#london'),
+            exeter: document.querySelector('.p400__forecast--weather-map--temp#exeter'),
+            birmingham: document.querySelector('.p400__forecast--weather-map--temp#birmingham'),
+            blackpool: document.querySelector('.p400__forecast--weather-map--temp#blackpool'),
+            belfast: document.querySelector('.p400__forecast--weather-map--temp#belfast'),
+            dumfries: document.querySelector('.p400__forecast--weather-map--temp#dumfries'),
+            inverness: document.querySelector('.p400__forecast--weather-map--temp#inverness'),
+        }
+    }
 }
 
 /*
@@ -37,6 +49,8 @@ const pageVDOM = {
     '100': {},
     '101': {},
     '102-11': {},
+
+    '400': {}
 }
 
 console.log('Page DOMS Loaded!');
