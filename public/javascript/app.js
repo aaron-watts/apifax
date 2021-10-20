@@ -111,7 +111,6 @@ const programme = {
         app-breaking-bug! must fix
         */
         climb: (pageN, count=0) => {
-            console.log(count)
             if (count < 100) {
                 const incrementer = Math.floor(Math.random() * 4) + 4;
             // if (scannerInterface.innerText !== pageN) {
@@ -129,7 +128,7 @@ const programme = {
                     scannerInterface.innerText = (parseInt(scannerInterface.innerText) + incrementer).toString();
                 }
 
-                setTimeout(() => {
+                programme.scanner.timeout = setTimeout(() => {
                     programme.scanner.climb(pageN, count);
                 }, 300)
             } else {
@@ -156,6 +155,8 @@ const programme = {
             scans.classList.add('green');
             // make the numbers match the hundred digit
             scannerInterface.innerText = (parseInt(pageNumber) + 1).toString();
+            // clear previous timeout if one exists
+            if (programme.scanner.timeout) clearTimeout(programme.scanner.timeout);
             // starting one above the hundred digit go up until loops to this number
             programme.scanner.climb(pageNumber);
         }
