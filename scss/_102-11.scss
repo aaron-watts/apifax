@@ -1,11 +1,70 @@
 .p102-11 {
     display: grid;
-    grid-template-rows: 4rem 1fr 1fr 1rem;
+    grid-template-rows: 4rem 5rem 1fr 2fr 1rem;
+    width: 20rem;
+    align-items: center;
+
+    #{&}__test-mark {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end;
+        border-bottom: .2rem solid white;
+        height: 5rem;
+
+        & div {
+            display: flex;
+            width: 8rem;
+            justify-content: space-between;
+
+            & div {
+                height: 1rem;
+                width: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            &:nth-of-type(1), &:nth-of-type(3) {
+                & div:nth-of-type(1) {
+                    background: $yellow;
+                }
+
+                & div:nth-of-type(2) {
+                    background: $magenta;
+                }
+
+                & div:nth-of-type(3) {
+                    background: $cyan;
+                }
+
+                & div:nth-of-type(4) {
+                    background: $white;
+                }
+            }
+
+            &:nth-of-type(2) {
+                & div:nth-of-type(1) {
+                    border: .2rem solid $yellow;               
+                }
+
+                & div:nth-of-type(2) {
+                    border: .2rem solid $magenta;                
+                }
+
+                & div:nth-of-type(3) {
+                    border: .2rem solid $cyan;                
+                }
+
+                & div:nth-of-type(4) {
+                    border: .2rem solid $white;                
+                }
+            }
+        }
+    }
 
     #{&}__header {
         border-bottom: 2px solid $magenta;
         display: grid;
         grid-template-columns: 18rem 22rem;
+        height: 4rem;
 
         &--brand {
             text-align: center;
@@ -18,17 +77,12 @@
                 text-transform: uppercase;
                 margin: 0 1rem;
                 text-shadow: $cyan -.1rem .1rem;
-                
-                // transform: scale(3) translateY(.2rem);
-                // transform-origin: top;
 
                 &:nth-of-type(odd) {
-                    // display: block;
                     transform: scaleY(3) scaleX(3) translateY(.1rem);
                     transform-origin: top;
                 }
                 &:nth-of-type(even) {
-                    // display: block;
                     transform: scaleY(3) scaleX(3) translateY(.2rem);
                     transform-origin: top;
                 }
@@ -51,7 +105,42 @@
 
     #{&}__headline {
         text-transform: capitalize;
-        transform: scaleY(2);
+        transform: scale(2);
         transform-origin: top left;
+        width: 18rem;
+        margin-left: 2rem;
+        color: $yellow;
+    }
+
+    #{&}__story {
+        width: 34rem;
+        transform: scaleY(2);
+        margin-top: 2rem;
+        margin-left: 2rem;
+        color: $cyan;
+    }
+
+    #{&}__footer {
+        text-align: center;
+        color: $magenta;
+        background: $white;
+    }
+}
+
+@include media-md {
+    .p102-11 {
+        #{&}__headline {
+            text-transform: capitalize;
+            transform: scaleY(2);
+            transform-origin: top left;
+            width: 36rem;
+            margin-left: 2rem;
+            color: $yellow;
+        }
+    
+        #{&}__story {
+            transform: scaleY(1);
+            margin-top: 2rem;
+        }
     }
 }

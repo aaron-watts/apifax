@@ -1,5 +1,5 @@
 // dev
-const loadPage = new Number(100).toString();
+const loadPage = new Number(102).toString();
 
 const header = document.querySelector('header');
 const clockInterface = header.children[2];
@@ -36,7 +36,7 @@ const clock = {
                 cancelable: false,
                 detail: null
             });
-            
+
             document.dispatchEvent(clock.event);
         }
     }
@@ -82,11 +82,11 @@ const programme = {
             body.appendChild(main);
 
             cacheDOM[pageNumber]();
-            
+
             for (let fn in pageFunctions[pageNumber]) {
                 pageFunctions[pageNumber][fn]();
             }
-            
+
             /*
             PageListeners are constructed in arrays of:
             [ event host, event name, callback ]
@@ -106,25 +106,15 @@ const programme = {
         to emulate behaviour of teletext scanning for a new channel
         Also serves as a way to annoy site visitors and reduce traffic, though
         this was never my intention
-
-        NOTE: This is not clearing the timeout on a second channel input,
-        app-breaking-bug! must fix
         */
-        climb: (pageN, count=0) => {
+        climb: (pageN, count = 0) => {
             if (count < 100) {
                 const incrementer = Math.floor(Math.random() * 4) + 4;
-            // if (scannerInterface.innerText !== pageN) {
-                // pageN += incrementer;
                 count += incrementer;
 
-                // if (!(parseInt(scannerInterface.innerText) % parseInt(`${pageN[0]}99`))) {
-                //     scannerInterface.innerText = (parseInt(scannerInterface.innerText) - 99).toString();
-                // pageN = 102  -----    100 - 2 = 98
-                if (count > 100 - parseInt(pageN.slice(1)) && count < parseInt(pageN.slice(1))) {
-                    scannerInterface.innerText = (parseInt(scannerInterface.innerText) - 100).toString();
-                } else if (count > 100 - parseInt(pageN.slice(1)) && count >= parseInt(pageN.slice(1))) {
+                if (count > 100 - parseInt(pageN.slice(1)) && count >= parseInt(pageN.slice(1))) {
                     scannerInterface.innerText = pageN;
-                }else {
+                } else {
                     scannerInterface.innerText = (parseInt(scannerInterface.innerText) + incrementer).toString();
                 }
 
@@ -134,10 +124,7 @@ const programme = {
             } else {
                 scans.classList.remove('green');
 
-                console.log('SCAN FINISHED!');
-                // loadPage(pageNumber);
                 if (pageN in pageTemplates) {
-                    console.log('PAGEN IN PAGES');
                     programme.currentPage = pageN;
                     programme.display.clearScreen();
                     programme.display.loadScreen(pageN);
@@ -150,14 +137,14 @@ const programme = {
         },
         /*
         A quick class change in the header before the yummy recursion
+        - set scanner number to pageNumber + 1
+        - clear any existing scan timeout to prevent bugs
+        - initiate scanner.climb method
         */
         scan: (pageNumber) => {
             scans.classList.add('green');
-            // make the numbers match the hundred digit
             scannerInterface.innerText = (parseInt(pageNumber) + 1).toString();
-            // clear previous timeout if one exists
             if (programme.scanner.timeout) clearTimeout(programme.scanner.timeout);
-            // starting one above the hundred digit go up until loops to this number
             programme.scanner.climb(pageNumber);
         }
     },
@@ -183,6 +170,11 @@ const programme = {
 window.addEventListener('keypress', (evt) => {
     if (!isNaN(evt.key)) {
         programme.channelInput(evt.key);
+    }
+
+    // toggle mute on audio
+    if (audio && evt.key === 'm') {
+        audio.muted = !audio.muted;
     }
 });
 

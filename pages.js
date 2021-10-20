@@ -67,12 +67,32 @@ pageTemplates = {
         <span>n</span><span>e</span><span>w</span><span>s</span>
     </div>
     <div class="p102-11__header--title">
-    <div class="text">stories</div>
+        <div class="text">stories</div>
     </div>    
 </div>
-<div class="p102-11__headline">Headline</div>
-<div class="p102-11__story">Story</div>
-<footer>ApiFax Index P100</footer>`,
+<div class="p102-11__test-mark">
+    <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="p102-11__headline"></div>
+<div class="p102-11__story"></div>
+<div class="p102-11__footer">ApiFax Index P100</div>`,
     
     '400' : `
 <div class="p400__header">weather</div>

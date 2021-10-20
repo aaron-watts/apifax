@@ -249,8 +249,74 @@ main {
 .p102-11 {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 4rem 1fr 1fr 1rem;
-      grid-template-rows: 4rem 1fr 1fr 1rem;
+  -ms-grid-rows: 4rem 5rem 1fr 2fr 1rem;
+      grid-template-rows: 4rem 5rem 1fr 2fr 1rem;
+  width: 20rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.p102-11 .p102-11__test-mark {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  border-bottom: .2rem solid white;
+  height: 5rem;
+}
+
+.p102-11 .p102-11__test-mark div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 8rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.p102-11 .p102-11__test-mark div div {
+  height: 1rem;
+  width: 1rem;
+  margin-bottom: 1rem;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(1) div:nth-of-type(1), .p102-11 .p102-11__test-mark div:nth-of-type(3) div:nth-of-type(1) {
+  background: #ff0;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(1) div:nth-of-type(2), .p102-11 .p102-11__test-mark div:nth-of-type(3) div:nth-of-type(2) {
+  background: #f0f;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(1) div:nth-of-type(3), .p102-11 .p102-11__test-mark div:nth-of-type(3) div:nth-of-type(3) {
+  background: #0ff;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(1) div:nth-of-type(4), .p102-11 .p102-11__test-mark div:nth-of-type(3) div:nth-of-type(4) {
+  background: #fff;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(2) div:nth-of-type(1) {
+  border: 0.2rem solid #ff0;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(2) div:nth-of-type(2) {
+  border: 0.2rem solid #f0f;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(2) div:nth-of-type(3) {
+  border: 0.2rem solid #0ff;
+}
+
+.p102-11 .p102-11__test-mark div:nth-of-type(2) div:nth-of-type(4) {
+  border: 0.2rem solid #fff;
 }
 
 .p102-11 .p102-11__header {
@@ -259,6 +325,7 @@ main {
   display: grid;
   -ms-grid-columns: 18rem 22rem;
       grid-template-columns: 18rem 22rem;
+  height: 4rem;
 }
 
 .p102-11 .p102-11__header--brand {
@@ -309,10 +376,46 @@ main {
 
 .p102-11 .p102-11__headline {
   text-transform: capitalize;
-  -webkit-transform: scaleY(2);
-          transform: scaleY(2);
+  -webkit-transform: scale(2);
+          transform: scale(2);
   -webkit-transform-origin: top left;
           transform-origin: top left;
+  width: 18rem;
+  margin-left: 2rem;
+  color: #ff0;
+}
+
+.p102-11 .p102-11__story {
+  width: 34rem;
+  -webkit-transform: scaleY(2);
+          transform: scaleY(2);
+  margin-top: 2rem;
+  margin-left: 2rem;
+  color: #0ff;
+}
+
+.p102-11 .p102-11__footer {
+  text-align: center;
+  color: #f0f;
+  background: #fff;
+}
+
+@media screen and (min-width: 580px) {
+  .p102-11 .p102-11__headline {
+    text-transform: capitalize;
+    -webkit-transform: scaleY(2);
+            transform: scaleY(2);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    width: 36rem;
+    margin-left: 2rem;
+    color: #ff0;
+  }
+  .p102-11 .p102-11__story {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    margin-top: 2rem;
+  }
 }
 
 .p400 {
