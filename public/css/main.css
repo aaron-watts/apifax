@@ -328,8 +328,9 @@ main {
   top: 1rem;
   left: 1rem;
   text-transform: uppercase;
-  -webkit-transform: scale(3);
-          transform: scale(3);
+  -webkit-transform: scaleY(3) scaleX(2);
+          transform: scaleY(3) scaleX(2);
+  letter-spacing: .5rem;
   -webkit-transform-origin: top left;
           transform-origin: top left;
   color: #0ff;
@@ -352,7 +353,7 @@ main {
 }
 
 .p400 .p400__forecast--summary {
-  margin-top: 2rem;
+  margin-top: 10rem;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;

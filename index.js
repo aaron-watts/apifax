@@ -28,7 +28,7 @@ app.get('/pages', (req, res) => {
 
 app.get('/data', db.checkLog, db.collectData, async (req, res) => {
   res.send(req.apiData);
-})
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);

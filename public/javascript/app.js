@@ -1,3 +1,6 @@
+// dev
+const loadPage = new Number(100).toString();
+
 const header = document.querySelector('header');
 const clockInterface = header.children[2];
 const dateInterface = [...[...header.children[1].children].splice(1)];
@@ -107,16 +110,27 @@ const programme = {
         NOTE: This is not clearing the timeout on a second channel input,
         app-breaking-bug! must fix
         */
-        climb: (pageN) => {
-            if (scannerInterface.innerText !== pageN) {
-                if (!(parseInt(scannerInterface.innerText) % parseInt(`${pageN[0]}99`))) {
-                    scannerInterface.innerText = (parseInt(scannerInterface.innerText) - 99).toString();
-                } else {
-                    scannerInterface.innerText = (parseInt(scannerInterface.innerText) + 1).toString();
+        climb: (pageN, count=0) => {
+            console.log(count)
+            if (count < 100) {
+                const incrementer = Math.floor(Math.random() * 4) + 4;
+            // if (scannerInterface.innerText !== pageN) {
+                // pageN += incrementer;
+                count += incrementer;
+
+                // if (!(parseInt(scannerInterface.innerText) % parseInt(`${pageN[0]}99`))) {
+                //     scannerInterface.innerText = (parseInt(scannerInterface.innerText) - 99).toString();
+                // pageN = 102  -----    100 - 2 = 98
+                if (count > 100 - parseInt(pageN.slice(1)) && count < parseInt(pageN.slice(1))) {
+                    scannerInterface.innerText = (parseInt(scannerInterface.innerText) - 100).toString();
+                } else if (count > 100 - parseInt(pageN.slice(1)) && count >= parseInt(pageN.slice(1))) {
+                    scannerInterface.innerText = pageN;
+                }else {
+                    scannerInterface.innerText = (parseInt(scannerInterface.innerText) + incrementer).toString();
                 }
 
                 setTimeout(() => {
-                    programme.scanner.climb(pageN);
+                    programme.scanner.climb(pageN, count);
                 }, 300)
             } else {
                 scans.classList.remove('green');
@@ -184,7 +198,7 @@ Promise.all([fetch('/pages'), fetch('/data')])
 
         buildNewsPages(apidata.news); // pageFunctions.js
 
-        programme.display.loadScreen('400');
+        programme.display.loadScreen(loadPage);
     })
     .catch(err => {
         console.log(err.message);

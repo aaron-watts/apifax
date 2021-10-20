@@ -8,7 +8,8 @@
         top: 1rem;
         left: 1rem;
         text-transform: uppercase;
-        transform: scale(3);
+        transform: scaleY(3) scaleX(2);
+        letter-spacing: .5rem;
         transform-origin: top left;
         color: $cyan;
         text-shadow: $black .1rem .1rem;
@@ -27,7 +28,8 @@
         // align-items: center;
 
         &--summary {
-            margin-top: 2rem;
+            margin-top: 10rem;
+            // margin-right: 10rem;
             align-self: center;
             text-align: right;
             width: 38rem;
