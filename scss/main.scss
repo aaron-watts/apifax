@@ -25,6 +25,31 @@ body {
     height: 100vh;
 }
 
+svg {
+    position: fixed;
+    top: 25px;
+    right: 10px;
+    fill: none;
+    width: 8rem;
+    height: 8rem;
+
+    &.mute {
+        z-index: 2;
+        stroke-width: .8rem;
+        stroke: $green;
+    }
+
+    &.mute-glare {
+        z-index: 1;
+        stroke-width: 1rem;
+        stroke: $white;
+    }
+
+    &.hidden {
+        visibility: hidden;
+    }
+}
+
 @include media-lg {
     * {
         font-size: 21px;

@@ -9,6 +9,8 @@ const channel = header.children[0];
 const scans = header.children[1];
 const scannerInterface = scans.children[0];
 
+const mute = document.querySelectorAll('svg.tv');
+
 /*
 A clock object to handle date/time in header and to provide a counter
 for timed events such as slide changes
@@ -164,6 +166,20 @@ const programme = {
         if (channel.innerText.indexOf('-') === -1) {
             programme.scanner.scan(channel.innerText);
         }
+    },
+    mute: (show=true) => {
+        if (show) {
+            for (let svg of mute) {
+                svg.classList.remove('hidden');
+                programme.muteTimeout = setTimeout(() => {
+                    programme.mute(false);
+                } ,3000)
+            }
+        } else {
+            for (let svg of mute) {
+                svg.classList.add('hidden');
+            }
+        }
     }
 };
 
@@ -175,6 +191,7 @@ window.addEventListener('keypress', (evt) => {
     // toggle mute on audio
     if (audio && evt.key === 'm') {
         audio.muted = !audio.muted;
+        programme.mute();
     }
 });
 

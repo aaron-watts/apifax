@@ -608,6 +608,31 @@ body {
   height: 100vh;
 }
 
+svg {
+  position: fixed;
+  top: 25px;
+  right: 10px;
+  fill: none;
+  width: 8rem;
+  height: 8rem;
+}
+
+svg.mute {
+  z-index: 2;
+  stroke-width: .8rem;
+  stroke: #0f0;
+}
+
+svg.mute-glare {
+  z-index: 1;
+  stroke-width: 1rem;
+  stroke: #fff;
+}
+
+svg.hidden {
+  visibility: hidden;
+}
+
 @media screen and (min-width: 820px) {
   * {
     font-size: 21px;
