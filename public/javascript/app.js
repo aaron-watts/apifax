@@ -1,5 +1,5 @@
 // dev
-const loadPage = new Number(102).toString();
+const loadPage = new Number(100).toString();
 
 const header = document.querySelector('header');
 const clockInterface = header.children[2];
@@ -114,11 +114,13 @@ const programme = {
                 const incrementer = Math.floor(Math.random() * 4) + 4;
                 count += incrementer;
 
-                if (count > 100 - parseInt(pageN.slice(1)) && count >= parseInt(pageN.slice(1))) {
-                    scannerInterface.innerText = pageN;
-                } else {
-                    scannerInterface.innerText = (parseInt(scannerInterface.innerText) + incrementer).toString();
-                }
+                // if (count > 100 - parseInt(pageN.slice(1)) && count >= parseInt(pageN.slice(1))) {
+                //     scannerInterface.innerText = pageN;
+                // } else {
+                //     scannerInterface.innerText = (parseInt(scannerInterface.innerText) + incrementer).toString();
+                // }
+                scannerInterface.innerText = `${pageN[0]}${(parseInt(scannerInterface.innerText) + incrementer).toString().slice(1)}`
+                if (count > 100) scannerInterface.innerText = pageN;
 
                 programme.scanner.timeout = setTimeout(() => {
                     programme.scanner.climb(pageN, count);
