@@ -94,19 +94,41 @@ pageTemplates = {
 <div class="p102-11__story"></div>
 <div class="p102-11__footer">ApiFax Index P100</div>`,
 
+'198': /* html */`
+<div class="p198__header">how to use apifax</div>
+<div class="p198__desktop-help">
+    <h1>desktop</h1>
+    <ul>
+        <li>Keys 0-9 for input</li>
+        <li>Key 'M' to toggle mute</li>
+    </ul>
+</div>
+<div class="p198__touchscreen-help">
+    <h1>touchscreen devices</h1>
+    <p>Tap the screen to activate remote interface</p>
+</div>`,
+
 '199': /* html */`
 <div class="p199__header">
     about <span>a</span><span>p</span><span>i</span><span>f</span><span>a</span><span>x</span>
 </div>
 <div class="p199__main">
-    <h1>Why?</h1>
-    <p>ApiFax is a personal project. I wanted to use
-    some public API services, but with little reason
-    use any, and a nostalgia for all the things of my
-    childhood, I decided a ceefax/teletext-centric web
-    app would be the perfect diversion of my time.</p>
-    <h2>GitHub</h2>
-    <p>https://github.com/aaron-watts/apifax</p>
+    <div class="p199__main--why">
+        <h1>Why?</h1>
+        <p>ApiFax is a personal project. I wanted to use
+        some public API services, but with little reason
+        use any, and a nostalgia for all the things of my
+        childhood, I decided a ceefax/teletext-centric web
+        app would be the perfect diversion of my time.</p>
+        <p>I would like to note TeeFax, by ZXGuesser, which
+        was a valuable resource while researching for this
+        project.</p>
+        <p>https://zxnet.co.uk/teletext/viewer</p>
+    </div>
+    <div class="p199__main--github">
+        <h2>GitHub</h2>
+        <p>https://github.com/aaron-watts/apifax</p>
+    </div>
 </div>
 `,
     

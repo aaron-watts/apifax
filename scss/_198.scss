@@ -1,0 +1,26 @@
+.p198 {
+    display: grid;
+    grid-template-rows: 1rem 1fr 1fr;;
+
+    & h1 {
+        text-transform: capitalize;
+        color: $blue;
+        background: $white;
+        margin-top: 1rem;
+        border-bottom: .2rem solid $blue;
+        font-size: 2rem;
+    }
+
+    #{&}__header {
+        text-transform: uppercase;
+        transform: scaleY(2);
+        transform-origin: top;
+        color: $red;
+        background: $white;
+        text-align: center;
+    }
+
+    #{&}__desktop-help {
+        margin-top: 1rem;
+    }
+}

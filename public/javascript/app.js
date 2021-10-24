@@ -1,5 +1,5 @@
 // dev
-const loadPage = new Number(100).toString();
+const loadPage = new Number(198).toString();
 
 const header = document.querySelector('header');
 const clockInterface = header.children[2];
@@ -126,6 +126,7 @@ const programme = {
                 scans.classList.remove('green');
 
                 if (pageN in pageTemplates) {
+                    scannerInterface.innerText = pageN;
                     programme.currentPage = pageN;
                     programme.display.clearScreen();
                     programme.display.loadScreen(pageN);

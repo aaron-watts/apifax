@@ -418,6 +418,37 @@ main {
   }
 }
 
+.p198 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1rem 1fr 1fr;
+      grid-template-rows: 1rem 1fr 1fr;
+}
+
+.p198 h1 {
+  text-transform: capitalize;
+  color: #00f;
+  background: #fff;
+  margin-top: 1rem;
+  border-bottom: 0.2rem solid #00f;
+  font-size: 2rem;
+}
+
+.p198 .p198__header {
+  text-transform: uppercase;
+  -webkit-transform: scaleY(2);
+          transform: scaleY(2);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  color: #f00;
+  background: #fff;
+  text-align: center;
+}
+
+.p198 .p198__desktop-help {
+  margin-top: 1rem;
+}
+
 .p199 {
   display: -ms-grid;
   display: grid;
@@ -444,6 +475,30 @@ main {
 .p199 .p199__header span:nth-of-type(odd) {
   -webkit-transform: translateY(0.4rem);
           transform: translateY(0.4rem);
+}
+
+.p199 .p199__main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 3fr 1fr;
+      grid-template-rows: 3fr 1fr;
+}
+
+.p199 .p199__main p {
+  color: #0ff;
+  margin: 1rem;
+}
+
+.p199 .p199__main p:nth-of-type(even) {
+  color: #fff;
+}
+
+.p199 .p199__main h1 {
+  font-size: 3rem;
+}
+
+.p199 .p199__main h2 {
+  font-size: 2rem;
 }
 
 .p400 {
@@ -665,7 +720,8 @@ svg.hidden {
   * {
     font-size: 21px;
   }
-  header, body > * {
+  header, body {
+    max-width: 40rem;
     margin: 0 auto;
   }
 }

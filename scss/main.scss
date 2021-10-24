@@ -2,6 +2,7 @@
 @import '100';
 @import '101';
 @import '102-11';
+@import '198';
 @import '199';
 @import '400';
 
@@ -56,7 +57,8 @@ svg {
         font-size: 21px;
     }
 
-    header, body > * {
+    header, body {
+        max-width: 40rem;
         margin: 0 auto;
     }
 }
