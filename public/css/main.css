@@ -31,6 +31,12 @@ main {
   white-space: pre;
 }
 
+.keypad {
+  position: fixed;
+  top: 50vh;
+  background: white;
+}
+
 .p100 {
   display: -ms-grid;
   display: grid;
