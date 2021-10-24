@@ -1,0 +1,28 @@
+.p199 {
+    display: grid;
+    grid-template-rows: 4rem auto;
+
+    #{&}__header {
+        background: $yellow;
+        color: $blue;
+        text-transform: uppercase;
+        text-align: center;
+        text-shadow: $black 0 -.3rem;
+        font-size: 3rem;
+        padding: .3rem;
+
+        & span {
+            font-size: 3rem;
+            display: inline-block;
+            text-transform: uppercase;
+
+            &:nth-of-type(odd) {
+                transform: translateY(.4rem);
+            }
+        }
+
+        #{&}__main{
+
+        }
+    }
+}

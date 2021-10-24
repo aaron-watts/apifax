@@ -114,12 +114,9 @@ const programme = {
                 const incrementer = Math.floor(Math.random() * 4) + 4;
                 count += incrementer;
 
-                // if (count > 100 - parseInt(pageN.slice(1)) && count >= parseInt(pageN.slice(1))) {
-                //     scannerInterface.innerText = pageN;
-                // } else {
-                //     scannerInterface.innerText = (parseInt(scannerInterface.innerText) + incrementer).toString();
-                // }
-                scannerInterface.innerText = `${pageN[0]}${(parseInt(scannerInterface.innerText) + incrementer).toString().slice(1)}`
+                scannerInterface.innerText =
+                    `${pageN[0]}${(parseInt(scannerInterface.innerText) + incrementer).toString().slice(1)}`;
+                    
                 if (count > 100) scannerInterface.innerText = pageN;
 
                 programme.scanner.timeout = setTimeout(() => {
@@ -169,13 +166,13 @@ const programme = {
             programme.scanner.scan(channel.innerText);
         }
     },
-    mute: (show=true) => {
+    mute: (show = true) => {
         if (show) {
             for (let svg of mute) {
                 svg.classList.remove('hidden');
                 programme.muteTimeout = setTimeout(() => {
                     programme.mute(false);
-                } ,3000)
+                }, 3000)
             }
         } else {
             for (let svg of mute) {
