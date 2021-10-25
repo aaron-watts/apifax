@@ -43,16 +43,20 @@ module.exports.setupDatabase = async () => {
     // Check for an existing log, add a base value of ZERO if none found
     // ZERO allows first api data collection to execute, log is then updated
     // to current time
-    const log = await db.all('SELECT * FROM log;');
+    const log = await db.all(/* SQL */`SELECT * FROM log;`);
+
     if (!log.length) {
         console.log("No previous log found..Writing base value of 0 to TABLE:'log'");
-        await db.run('INSERT INTO log (lastCall) VALUES (?);', 0);
+
+        await db.run(/* SQL */`INSERT INTO log (lastCall) VALUES (?);`, 0);
     }
 }
 
 const updateLog = async (timestamp) => {
     const db = await dbPromise;
-    const sql = `UPDATE log SET lastCall = ? WHERE id = ? ;`;
+
+    const sql = /* SQL */`UPDATE log SET lastCall = ? WHERE id = ? ;`;
+
     await db.run(sql, [timestamp, 1]);
 }
 
@@ -69,7 +73,7 @@ const formatInsertMany = (arr, table) => {
 
     const placeholders = arr.map(i => `(${keys.map(key => '?').join(' , ')})`).join(',');
 
-    return [`INSERT INTO ${tables[table]} (${keys.map(key => key).join(' ,')}) 
+    return [/* SQL */`INSERT INTO ${tables[table]} (${keys.map(key => key).join(' ,')}) 
             VALUES ${placeholders};`, values];
 };
 
@@ -77,21 +81,21 @@ const formatUpdate = (data, table, index) => {
     const keys = Object.keys(data);
     const values = [];
 
-    let sql = `UPDATE ${tables[table]} SET `;
+    let sql = /* SQL */`UPDATE ${tables[table]} SET `;
 
     keys.forEach(i => {
-        sql += `${i} = (?),`;
+        sql += /* SQL */`${i} = (?),`;
         values.push(data[i]);
     });
 
-    sql = `${sql.slice(0, sql.length - 1)} WHERE id = ${index}`;
+    sql = /* SQL */`${sql.slice(0, sql.length - 1)} WHERE id = ${index}`;
 
     return [sql, values];
 }
 
 const getAll = async (table) => {
     const db = await dbPromise;
-    return await db.all(`SELECT * FROM ${table};`)
+    return await db.all(/* SQL */`SELECT * FROM ${table};`)
 };
 
 module.exports.collectData = async (req, res, next) => {
@@ -113,7 +117,7 @@ module.exports.checkLog = async (req, res, next) => {
     const now = new Date().getTime();
 
     const db = await dbPromise;
-    const log = await db.all('SELECT * FROM log;');
+    const log = await db.all(/* SQL */`SELECT * FROM log;`);
 
     // if last data collection was over an hour ago, then do a new one
     if (now - (log[0].lastCall * 1000) > (1000 * 60 * 60)) {

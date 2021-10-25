@@ -167,4 +167,4 @@ pageTemplates = {
 <div class="p400__footer"><span class="slide">1</span> / 7</div>`
 }
 
-module.exports = {pageTemplates};
+module.exports = { pageTemplates };
