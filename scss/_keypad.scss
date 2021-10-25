@@ -1,5 +1,47 @@
 .keypad {
     position: fixed;
-    top: 50vh;
-    background: white;
+    top: 30vh;
+    background: transparent;
+    height: 60vh;
+    width: 80vw;
+    left: 10vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+    & button {
+        height: 20vw;
+        width: 20vw;
+        border-radius: 50%;
+        align-self: center;
+        justify-self: center;
+        font-family: sans-serif;
+        color: #fffe;
+        font-size: 10vw;
+        font-family: 'Baloo Paaji 2', sans-serif;
+        border: 2px solid #222b;
+        border-bottom-width: 4px;
+        border-right-width: 4px;
+        box-shadow: #000 1px 1px 10px 10px;
+
+        // background: rgba(255, 255, 255, .7);
+        background: #000000bd;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+
+        transition: box-shadow .2s, border-width .2s;
+
+        &:active {
+            background: #0000008c;
+            border-bottom-width: 2px;
+            border-right-width: 2px;
+            transform: translate(2px, 2px);
+            box-shadow: #000 1px 1px 6px 6px;
+        }
+
+        & i {
+            font-size: 8vw;
+            margin-top: 30%;
+        }
+    }
 }
