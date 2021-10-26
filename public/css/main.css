@@ -35,7 +35,8 @@ main {
   position: fixed;
   top: 30vh;
   background: transparent;
-  height: 60vh;
+  padding: 1rem;
+  height: 65vh;
   width: 80vw;
   left: 10vw;
   display: -ms-grid;
@@ -44,11 +45,16 @@ main {
       grid-template-columns: repeat(3, 1fr);
   -ms-grid-rows: (1fr)[4];
       grid-template-rows: repeat(4, 1fr);
+  z-index: 1;
+}
+
+.keypad.hide {
+  display: none;
 }
 
 .keypad button {
-  height: 20vw;
-  width: 20vw;
+  height: 18vw;
+  width: 19vw;
   border-radius: 50%;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;

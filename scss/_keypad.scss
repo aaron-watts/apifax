@@ -2,16 +2,22 @@
     position: fixed;
     top: 30vh;
     background: transparent;
-    height: 60vh;
+    padding: 1rem;
+    height: 65vh;
     width: 80vw;
     left: 10vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    z-index: 1;
+
+    &.hide {
+        display: none;
+    }
 
     & button {
-        height: 20vw;
-        width: 20vw;
+        height: 18vw;
+        width: 19vw;
         border-radius: 50%;
         align-self: center;
         justify-self: center;
