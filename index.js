@@ -10,7 +10,7 @@ const db = require('./utils/db_utils');
 
 const { pageTemplates } = require('./pages');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // init database
 db.setupDatabase();
