@@ -229,9 +229,13 @@ keypadButtons.forEach(button => {
 })
 
 document.addEventListener('click', (evt) => {
-    // console.dir(evt.target);
-    // if (evt.target !== keypad) {
-    if (!keypadButtons.includes(evt.target) && !keypadButtons.includes(evt.target.parentElement)) {
+    if (!keypadButtons.includes(evt.target) && 
+    !keypadButtons.includes(evt.target.parentElement)) {
         keypad.classList.toggle('hide');
+        const btnDisabled = keypad.classList.contains('hide');
+        
+        keypadButtons.forEach(button => {
+            button.disabled = btnDisabled;
+        });
     }
 })
