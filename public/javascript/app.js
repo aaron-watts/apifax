@@ -214,3 +214,16 @@ Promise.all([fetch('/pages'), fetch('/data')])
         console.log(err.message);
     })
 
+const keypad = document.querySelector('div.keypad');
+const keypadButtons = [...keypad.children];
+
+keypadButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (audio && button.classList.contains('mute')) {
+            audio.muted = !audio.muted;
+            programme.mute();
+        } else {
+            programme.channelInput(button.innerText);
+        }
+    })
+})
